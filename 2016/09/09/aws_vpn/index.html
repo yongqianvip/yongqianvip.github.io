@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>没有迈不过去的坎，也没有翻不过去的墙 | YongQian&#39;s Blog | 不积跬步无以至千里</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="VPN">
+  <meta name="description" content="这里记录一下我是如何在Mac上借助AWS(Amazon Web Services)免费搭建VPN服务器的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="没有迈不过去的坎，也没有翻不过去的墙">
+<meta property="og:url" content="http://yongqianvip.github.io/2016/09/09/aws_vpn/index.html">
+<meta property="og:site_name" content="YongQian's Blog">
+<meta property="og:description" content="这里记录一下我是如何在Mac上借助AWS(Amazon Web Services)免费搭建VPN服务器的">
+<meta property="og:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/step.png">
+<meta property="og:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/step01.png">
+<meta property="og:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/step02.png">
+<meta property="og:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/step05.png">
+<meta property="og:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/step06.png">
+<meta property="og:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/step08.png">
+<meta property="og:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/image/vpn/step11.png">
+<meta property="og:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/step12.png">
+<meta property="og:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/shadowsocksserver.png">
+<meta property="og:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/shadowsockssetting.png">
+<meta property="og:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/google.png">
+<meta property="og:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/terminal.png">
+<meta property="og:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/awsfree.png">
+<meta property="og:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/creatalert.png">
+<meta property="og:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/toplevel.png">
+<meta property="og:updated_time" content="2016-09-14T13:12:57.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="没有迈不过去的坎，也没有翻不过去的墙">
+<meta name="twitter:description" content="这里记录一下我是如何在Mac上借助AWS(Amazon Web Services)免费搭建VPN服务器的">
+<meta name="twitter:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/step.png">
+  
+    <link rel="alternative" href="/atom.xml" title="YongQian&#39;s Blog" type="application/atom+xml">
+  
+  <meta name="summary" content="&lt;p&gt;这里记录一下我是如何在Mac上借助AWS(Amazon Web Services)&lt;strong&gt;免费&lt;/strong&gt;搭建VPN服务器的&lt;br&gt;">
+  <link rel="shortcut icon" href="/img/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <nav id="menu" class="hide" >
+   <div class="inner flex-row-vertical">
+  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="/" class="avatar"><img src="/img/header.jpeg"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">Yin Yongqian</h5>
+        <a href="mailto:yongqianvip@163.com" title="yongqianvip@163.com" class="mail">yongqianvip@163.com</a>
+      </hgroup>
+    </div>
+  </div>
+  <div class="scroll-wrap flex-col">
+    <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/archives"  >
+              <i class="icon icon-lg icon-archives"></i>
+              博客
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              标签
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/yongqianvip" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="http://www.weibo.com/3069749675" target="_blank" >
+              <i class="icon icon-lg icon-weibo"></i>
+              微博
+            </a>
+          </li>
+      
+    </ul>
+
+    <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>YongQian&#39;s Blog &copy; 2016</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+  </div>
+</div>
+
+  </nav>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">没有迈不过去的坎，也没有翻不过去的墙</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">没有迈不过去的坎，也没有翻不过去的墙</h1>
+    <h5 class="subtitle">
+        
+            <time datetime="2016-09-09T07:07:25.000Z" itemprop="datePublished" class="page-time">
+  2016-09-09
+</time>
+
+
+        
+    </h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      <article id="post-aws_vpn" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meta flex-row">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/VPN/">VPN</a></li></ul>
+
+    </div>
+    <div class="post-body">
+        <aside class="post-widget" id="post-widget">
+
+            
+            <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+            
+
+            
+            <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一、搭建远程服务器"><span class="post-toc-text">一、搭建远程服务器</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#二、SSH登录远程服务器并安装相关程序-Shadowsocks"><span class="post-toc-text">二、SSH登录远程服务器并安装相关程序(Shadowsocks)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#三、本机安装Shadowsocks客户端"><span class="post-toc-text">三、本机安装Shadowsocks客户端</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#四、Google一下"><span class="post-toc-text">四、Google一下</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#五、设置Shadowsocks开机启动"><span class="post-toc-text">五、设置Shadowsocks开机启动</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#六、如何避免收费"><span class="post-toc-text">六、如何避免收费</span></a></li></ol>
+            </nav>
+            
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" id="post-content" itemprop="postContent">
+            <p>这里记录一下我是如何在Mac上借助AWS(Amazon Web Services)<strong>免费</strong>搭建VPN服务器的<br><a id="more"></a></p>
+<blockquote>
+<p>生活用百度，技术用谷歌<br>由于种种原因，我们并不能直接访问谷歌等一些国外网站<br>但是，<br>“没有什么事是程序员不能解决的，如果有，那就让别人解决吧”  </p>
+</blockquote>
+<p><strong>Q: How to do？</strong></p>
+<p><strong>A: Follow me！</strong></p>
+<p>这里要说明一点，服务确实是免费的(为期一年，超过一年将收费)，不过仍然<strong>需要一张信用卡</strong>，亚马逊需要1美元的授权，只是授权，不会加入账单，在我看来可以理解为押金，如果你用的全部是套餐内的服务，钱是不会被扣的，而如果超出了套餐内容，这笔钱会根据用量扣除，下文也会讲到如何避免。</p>
+<p>网上这种类似的教程很多，但是就像穿鞋，合不合脚，只有自己知道。</p>
+<h2 id="一、搭建远程服务器"><a href="#一、搭建远程服务器" class="headerlink" title="一、搭建远程服务器"></a>一、搭建远程服务器</h2><p>登录<a href="http://aws.amazon.com/cn/" target="_blank" rel="external">亚马逊(http://aws.amazon.com/cn/)</a>，没有账号的请自行注册</p>
+<ol>
+<li><p>选择<code>免费试用Amazon EC2</code><br><img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/step.png" alt=""></p>
+</li>
+<li><p>选择系统映像，这里选择Amazon Liunx，当然也可以选择其他的，但是我用的是Amazon Liunx，然后“下一步”<br>由于我这里单纯是为了但见一个VPN服务器，对配置没多大的要求，所以选择<br><img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/step01.png" alt=""></p>
+</li>
+<li><p>选择实例类型，然后“下一步”<br><img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/step02.png" alt=""></p>
+</li>
+<li><p>接下来的“配置实例”，“添加存储”直接用默认设置，点“下一步”即可 </p>
+</li>
+<li><p>到“标签实例”中，创建密钥标签，内容自定<br><img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/step05.png" alt=""></p>
+</li>
+<li><p>“配置安全组件”，默认是”SSH”，建议改为”所有流量”，以后也可以改<br><img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/step06.png" alt=""></p>
+</li>
+<li><p>“审核”页面，点击”启动”按钮，创建新的密钥对，命名之后点击下载，下载好的<code>.pem</code>文件<strong>保存好</strong>，<strong>保存好</strong>，<strong>保存好</strong>，以后通过SSH登录远程服务器要用，完成后就可以启动实例了。<br><img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/step08.png" alt=""></p>
+</li>
+<li><p>等待一小会儿，刷新控制面板就可以看到正在运行的实例了。</p>
+</li>
+<li><p>实例我理解为我的远程服务器，可以在界面上操作它的启动、停止、重启和终止，其中重启不会改变公有IP，其他操作都会改变公有IP，所以进行重启之外的操作之后，Shadowsocks的相关配置记得统一变更</p>
+</li>
+</ol>
+<h2 id="二、SSH登录远程服务器并安装相关程序-Shadowsocks"><a href="#二、SSH登录远程服务器并安装相关程序-Shadowsocks" class="headerlink" title="二、SSH登录远程服务器并安装相关程序(Shadowsocks)"></a>二、SSH登录远程服务器并安装相关程序(<em>Shadowsocks</em>)</h2><ol>
+<li>右键选中的实例，打开“连接”，弹出信息框<br> <img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/vpn/step11.png" alt=""><br> <img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/step12.png" alt=""></li>
+<li><p>打开终端</p>
+<ul>
+<li><p>首先需要使密钥不公开可见</p>
+<pre><code>chmod 400 &lt;*.pem文件路径&gt;
+</code></pre></li>
+<li><p>SSH登录（命令可以复制上图中的示例）</p>
+<pre><code>ssh -i &lt;*.pem文件路径&gt; ec2-user@&lt;服务器公有DNS&gt;
+</code></pre><p>  根据提示输入<code>yes</code>即可连接远程服务器。</p>
+</li>
+</ul>
+</li>
+<li><p>依次执行如下三条命令安装相关的软件</p>
+<pre><code>$ sudo yum install -y python-setuptools
+$ sudo easy_install pip
+$ sudo pip install shadowsocks
+</code></pre></li>
+<li><p>软件安装完成，添加配置文件  </p>
+<ul>
+<li><p>创建文件夹</p>
+<pre><code>mkdir /etc/configfile
+</code></pre></li>
+<li><p>vim编辑config.json(vim是一种文本编辑器感兴趣的去<a href="http://www.jianshu.com/p/bcbe916f97e1" target="_blank" rel="external">这里</a>了解一下)</p>
+<pre><code>sudo vim /etc/configfile/config.json
+</code></pre><p>  粘贴以下内容</p>
+<pre><code>{
+    &quot;server_port”:8081,
+    &quot;password”:”123456789”,
+    &quot;timeout&quot;:300,
+    &quot;method&quot;:&quot;aes-256-cfb&quot;,
+}
+</code></pre><p>  &nbsp;&nbsp;&nbsp;&nbsp;其中，端口号<code>server_port</code>根据自己情况制定（1024 ~ 65535），密码<code>password</code>自己制定并要牢记，加密方式<code>method</code>默认选<code>aes-256-cfb</code>，这些信息后边用户在终端登录要用到，超时时间<code>timeout</code>自己指定。<br>  &nbsp;&nbsp;&nbsp;&nbsp;另外，如果想给不同端口设置不同密码，参照下边的格式即可</p>
+<pre><code>{
+    &quot;port_password&quot;:{
+         &quot;8088&quot;:&quot;password1&quot;,
+         &quot;8089&quot;:&quot;password2&quot;
+    },
+    &quot;method&quot;:&quot;aes-256-cfb&quot;,
+    &quot;timeout&quot;:300
+}
+</code></pre><p>  编辑完成后按<code>Esc</code>退出编辑模式（回到命令模式）<br>  输入<code>:wq</code>（保存并退出编辑）</p>
+</li>
+<li><p>启动shadowsocks</p>
+<pre><code>sudo ssserver -c /etc/configfile/config.json -d start
+</code></pre><blockquote>
+<p><strong>备注:</strong><br>笔者在执行上述命令时遇到命令不被识别的问题，所以最终只能使用命令全路径<br>ssserver路径通过<code>which ssserver</code>命令可以拿到<br>所以最终我的命令是：<br>/usr/bin/sudo /usr/local/bin/ssserver -c /etc/configfile/config.json -d start </p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="三、本机安装Shadowsocks客户端"><a href="#三、本机安装Shadowsocks客户端" class="headerlink" title="三、本机安装Shadowsocks客户端"></a>三、本机安装Shadowsocks客户端</h2><ul>
+<li>本机安装Shadowsocks客户端，看这里<a href="http://www.godusevpn.mobi/wiki.html" target="_blank" rel="external">http://www.godusevpn.mobi/wiki.html</a>就够了，虽然不买他们的服务，但是看看他们的教程还是可以的嘛🤗🤗🤗</li>
+</ul>
+<ul>
+<li>（以Mac为例）按照下图，打开Shadowsocks菜单<br><em><code>菜单</code></em> -&gt; <em><code>服务器</code></em> -&gt; <em><code>打开服务器设定</code></em><br><img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/shadowsocksserver.png" alt=""></li>
+<li>配置自己的服务器IP、端口号，加密方式<code>aes-256-cfb</code>,密码<br><img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/shadowsockssetting.png" alt=""></li>
+<li>配置完成之后再打开Shadowsocks菜单<br><em><code>菜单</code></em> -&gt; <em><code>服务器</code></em> -&gt; 勾选刚才添加的项目</li>
+</ul>
+<h2 id="四、Google一下"><a href="#四、Google一下" class="headerlink" title="四、Google一下"></a>四、Google一下</h2><p>到这里，你应该就可以顺利的访问下边的网站了</p>
+<p><a href="http://www.google.com" target="_blank" rel="external">http://www.google.com</a><br><a href="http://www.facebook.com" target="_blank" rel="external">http://www.facebook.com</a><br><a href="http://www.twitter.com" target="_blank" rel="external">http://www.twitter.com</a><br><img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/google.png" alt=""></p>
+<h2 id="五、设置Shadowsocks开机启动"><a href="#五、设置Shadowsocks开机启动" class="headerlink" title="五、设置Shadowsocks开机启动"></a>五、设置Shadowsocks开机启动</h2><p>有的时候我们需要重启服务器，为避免每次重启服务器之后手动启动Shadowsocks，我们可以把它设置为开机启动</p>
+<pre><code>sudo vi /etc/rc.local
+</code></pre><p>在<code>rc.local</code>文件末尾添加如下代码</p>
+<pre><code>sudo ssserver -c /etc/configfile/config.json -d start
+</code></pre><blockquote>
+<p><strong>备注：</strong><br>如果上边也曾遇到过命令不识别的问题，这里也需要拼全路径的<br>/usr/bin/sudo /usr/local/bin/ssserver -c /etc/configfile/config.json -d start</p>
+</blockquote>
+<h2 id="六、如何避免收费"><a href="#六、如何避免收费" class="headerlink" title="六、如何避免收费"></a>六、如何避免收费</h2><p>虽说我们选的是免费的套餐，但是仍有可能一个不小心信用卡上就多了一笔账单<br>有两种情况：  </p>
+<ol>
+<li><p>套餐过期继续使用  </p>
+<p> 所以记得到期的时间，如果不想产生费用，最简单粗暴的方法就是关停使用中的实例，实例终止之后系统会在一定时间内清理掉你得实例  </p>
+<p> <img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/terminal.png" alt=""></p>
+</li>
+<li><p>因为你可能在不知情的情况下超出套餐用量  </p>
+<p> 针对这个问题，好在有CloudWatch，通过CloudWatch我们可以<strong><em>设定警告</em></strong></p>
+<ul>
+<li><p>首先我们看一下AWS免费套餐的标准</p>
+<p><img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/awsfree.png" alt=""></p>
+</li>
+<li><p>对于不做其他用途，仅用于搭建VPN平台的我来说，流量、存储什么的足够了，所以我主要给I/O设置了警报，当然可以结合实际情况，自定义警报类型  </p>
+</li>
+<li><p>打开<a href="https://ap-northeast-1.console.aws.amazon.com/cloudwatch" target="_blank" rel="external">CloudWatch</a></p>
+</li>
+<li><p>选择<code>警报</code>-&gt;<code>创建警报</code> -&gt; <code>EBS</code> -&gt; <code>勾选监控指标（卷读取操作）</code> -&gt; <code>下一步</code><br>接下来定义警报内容：设置警报阈值，并在通知操作栏中选择通知列表（如果没有，需要新建，包括添加邮箱列表，邮箱确认等一系列步骤，这里不再赘述），最后成功创建警报，警报创建成功后，当指标超过设定的上限时，通知列表中的邮箱会收到来自AWS Notifications发来的警报邮件。</p>
+<p><img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/creatalert.png" alt=""></p>
+<p><img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/aws/toplevel.png" alt=""></p>
+<p>监控不同的指标需要设定不同的警报，所以，再以同样的方法设定<code>卷写入操作</code>的指标监控警报。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>通过一系列警报和设置，我们可以提前有所准备，但可能做不到完全避免，同时由于我对AWS也只接触了一天的时间，CloudWatch肯定还有更多强大的功能没有被我发现，所以还有很多工作要做，也希望同学们有新的发现及时分享给大家。</p>
+
+
+            
+            <div class="post-reward">
+                <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+            </div>
+            
+            
+            <blockquote>
+                <p>
+                本文地址：
+                <a href="http://yongqianvip.github.io/2016/09/09/aws_vpn/" target="_blank" rel="external">http://yongqianvip.github.io/2016/09/09/aws_vpn/</a>
+                </p>
+                <footer><cite><a href="http://yongqianvip.github.io">@YongQian's Blog</a></cite></footer>
+            </blockquote>
+            </div>
+            
+<nav class="post-nav">
+  
+
+  
+    <div class="waves-block waves-effect next fr">
+      <a href="/2016/08/26/iOS_Tips/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">iOS开发技巧</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="aws_vpn" data-title="没有迈不过去的坎，也没有翻不过去的墙" data-url="http://yongqianvip.github.io/2016/09/09/aws_vpn/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"yongqian"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+        </div>
+    </div>
+</article>
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>
+var BLOG_SHARE = {
+    title: "没有迈不过去的坎，也没有翻不过去的墙",
+    pic: "/img/header.jpeg",
+    summary: document.getElementsByName('summary')[0].content,
+    url: "http://yongqianvip.github.io/2016/09/09/aws_vpn/index.html"
+};
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        🤗🤗5毛钱也是爱🤗🤗
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</script>
+
+<script src="/js/search.js"></script>
+
+
+
+
+
+<script src="//s95.cnzz.com/z_stat.php?id=1260387689&web_id=1260387689"></script>
+
+
+
+
+
+</body>
+</html>

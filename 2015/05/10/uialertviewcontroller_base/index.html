@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>UIAlertView 和 UIAlertViewController之间的抉择 | YongQian&#39;s Blog | 不积跬步无以至千里</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="iOS">
+  <meta name="description" content="iOS8之后UIAlertViewController的出现让我们不得不考虑在iOS7上的兼容问题
+其实无非是做一下判断iOS8之前仍然用UIAlertView 之后用UIAlertViewController">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UIAlertView 和 UIAlertViewController之间的抉择">
+<meta property="og:url" content="http://yongqianvip.github.io/2015/05/10/uialertviewcontroller_base/index.html">
+<meta property="og:site_name" content="YongQian's Blog">
+<meta property="og:description" content="iOS8之后UIAlertViewController的出现让我们不得不考虑在iOS7上的兼容问题
+其实无非是做一下判断iOS8之前仍然用UIAlertView 之后用UIAlertViewController">
+<meta property="og:updated_time" content="2016-09-13T08:38:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UIAlertView 和 UIAlertViewController之间的抉择">
+<meta name="twitter:description" content="iOS8之后UIAlertViewController的出现让我们不得不考虑在iOS7上的兼容问题
+其实无非是做一下判断iOS8之前仍然用UIAlertView 之后用UIAlertViewController">
+  
+    <link rel="alternative" href="/atom.xml" title="YongQian&#39;s Blog" type="application/atom+xml">
+  
+  <meta name="summary" content="&lt;p&gt; iOS8之后UIAlertViewController的出现让我们不得不考虑在iOS7上的兼容问题&lt;/p&gt;
+&lt;p&gt;其实无非是做一下判断iOS8之前仍然用UIAlertView 之后用UIAlertViewController&lt;br&gt;">
+  <link rel="shortcut icon" href="/img/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <nav id="menu" class="hide" >
+   <div class="inner flex-row-vertical">
+  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="/" class="avatar"><img src="/img/header.jpeg"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">Yin Yongqian</h5>
+        <a href="mailto:yongqianvip@163.com" title="yongqianvip@163.com" class="mail">yongqianvip@163.com</a>
+      </hgroup>
+    </div>
+  </div>
+  <div class="scroll-wrap flex-col">
+    <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/archives"  >
+              <i class="icon icon-lg icon-archives"></i>
+              博客
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              标签
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/yongqianvip" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="http://www.weibo.com/3069749675" target="_blank" >
+              <i class="icon icon-lg icon-weibo"></i>
+              微博
+            </a>
+          </li>
+      
+    </ul>
+
+    <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>YongQian&#39;s Blog &copy; 2016</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+  </div>
+</div>
+
+  </nav>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">UIAlertView 和 UIAlertViewController之间的抉择</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">UIAlertView 和 UIAlertViewController之间的抉择</h1>
+    <h5 class="subtitle">
+        
+            <time datetime="2015-05-10T07:07:25.000Z" itemprop="datePublished" class="page-time">
+  2015-05-10
+</time>
+
+
+        
+    </h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      <article id="post-uialertviewcontroller_base" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meta flex-row">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+    </div>
+    <div class="post-body">
+        <aside class="post-widget" id="post-widget">
+
+            
+            <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+            
+
+            
+            <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#关于UIAlertViewController"><span class="post-toc-text">关于UIAlertViewController</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#如何使用"><span class="post-toc-text">如何使用</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#补充"><span class="post-toc-text">补充</span></a></li></ol>
+            </nav>
+            
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" id="post-content" itemprop="postContent">
+            <p> iOS8之后UIAlertViewController的出现让我们不得不考虑在iOS7上的兼容问题</p>
+<p>其实无非是做一下判断iOS8之前仍然用UIAlertView 之后用UIAlertViewController<br><a id="more"></a></p>
+<h4 id="关于UIAlertViewController"><a href="#关于UIAlertViewController" class="headerlink" title="关于UIAlertViewController"></a>关于UIAlertViewController</h4><p>看<code>源码</code></p>
+<ul>
+<li><strong>首先要说的是<code>UIAlertControllerStyle</code>这一属性</strong></li>
+</ul>
+<p>在头文件中</p>
+<pre><code>typedef NS_ENUM(NSInteger, UIAlertControllerStyle) {
+  UIAlertControllerStyleActionSheet = 0,
+  UIAlertControllerStyleAlert
+} NS_ENUM_AVAILABLE_IOS(8_0);
+</code></pre><p>这么一来，UIAlertController就等于是<code>UIAlertView</code>和<code>UIActionSheet</code>的合体了，只需要设置不同的style就可任意的切换要AlertView还是ActionSheet了<br>（ActionSheet这里先不说，这里主要说说UIAlertController替代UIAlertView的用法）。</p>
+<ul>
+<li><strong>其次是继承关系</strong></li>
+</ul>
+<p>·</p>
+<pre><code>NS_CLASS_AVAILABLE_IOS(8_0) @interface UIAlertController : UIViewController
+</code></pre><p><code>UIAlertController</code>继承自<code>UIViewController</code>，那么注定它的用法和继承自<code>UIView</code>的<code>UIAlertView</code>和<code>UIActionSheet</code>不同，<code>addSubView:</code>的方法肯定是不能用了，在一个controller中想要呈现另一个controller，我首先想到的是模态</p>
+<pre><code>- (void)presentViewController:(UIViewController *)viewControllerToPresent animated: (BOOL)flag completion:(void (^ __nullable)(void))completion NS_AVAILABLE_IOS(5_0);
+</code></pre><p>了解以上的基本信息，就可以开始尝试使用了</p>
+<h4 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h4><pre><code>//初始化
+UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@&quot;温馨提示&quot; message:@&quot;您正在使用 UIAlertController&quot; preferredStyle:UIAlertControllerStyleAlert];
+
+//创建action 添加到alertController上 可根据UIAlertActionStyleDefault创建不通的alertAction
+UIAlertAction *action1 = [UIAlertAction actionWithTitle:@&quot;确定&quot; style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    //回调
+    // 模态视图，使用dismiss 隐藏
+    [alertController dismissViewControllerAnimated:YES completion:nil];
+
+}];
+UIAlertAction *action2 = [UIAlertAction actionWithTitle:@&quot;取消&quot; style:UIAlertActionStyleCancle handler:^(UIAlertAction *action) {
+    [alertController dismissViewControllerAnimated:YES completion:nil];
+
+}];
+
+//往alertViewController上添加alertAction
+[alertController addAction:action1];
+[alertController addAction:action2];
+
+//呈现
+[self presentViewController:alertController animated:YES completion:nil];
+</code></pre><p>这里需要提一下<code>UIAlertAction</code>，它是随UIAlertViewController一起出现的，它的用法也很简单，看头文件就行了，不再赘述，但需要特别说明的是，UIAlertAction通过block回调使alert相关的代码变得紧凑，明了，不再像UIAlertView使用delegate把相关代码拆散。</p>
+<h4 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h4><p>其实从上边可以看出使用UIAlertViewController是非常简单的，无非用的时候做一下兼容处理，为什么我还要写这么一段？因为有人懒。。。。</p>
+<p>这里有一个工具类，做好了iOS8之前和之后的兼容</p>
+<p>拿走不谢<a href="https://github.com/yongqianvip/iOS_DevTool" target="_blank" rel="external">https://github.com/yongqianvip/iOS_DevTool</a></p>
+
+
+            
+            <div class="post-reward">
+                <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+            </div>
+            
+            
+            <blockquote>
+                <p>
+                本文地址：
+                <a href="http://yongqianvip.github.io/2015/05/10/uialertviewcontroller_base/" target="_blank" rel="external">http://yongqianvip.github.io/2015/05/10/uialertviewcontroller_base/</a>
+                </p>
+                <footer><cite><a href="http://yongqianvip.github.io">@YongQian's Blog</a></cite></footer>
+            </blockquote>
+            </div>
+            
+<nav class="post-nav">
+  
+    <div class="waves-block waves-effect prev fl">
+      <a href="/2015/08/18/iOS_loadGif/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">iOS中加载Gif图的正确姿势</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next fr">
+      <a href="/2015/03/15/RecreatRebuild/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">&lt;&lt;重构是改革,重写是革命&gt;&gt;</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="uialertviewcontroller_base" data-title="UIAlertView 和 UIAlertViewController之间的抉择" data-url="http://yongqianvip.github.io/2015/05/10/uialertviewcontroller_base/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"yongqian"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+        </div>
+    </div>
+</article>
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>
+var BLOG_SHARE = {
+    title: "UIAlertView 和 UIAlertViewController之间的抉择",
+    pic: "/img/header.jpeg",
+    summary: document.getElementsByName('summary')[0].content,
+    url: "http://yongqianvip.github.io/2015/05/10/uialertviewcontroller_base/index.html"
+};
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        🤗🤗5毛钱也是爱🤗🤗
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</script>
+
+<script src="/js/search.js"></script>
+
+
+
+
+
+<script src="//s95.cnzz.com/z_stat.php?id=1260387689&web_id=1260387689"></script>
+
+
+
+
+
+</body>
+</html>

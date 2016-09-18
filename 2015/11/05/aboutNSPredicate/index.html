@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>谓词 NSPredicate | YongQian&#39;s Blog | 不积跬步无以至千里</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="iOS">
+  <meta name="description" content="NSPredicate：谓词
+字面翻译是这个意思，但是我觉得谓词这个词太难以理解了NSPredicate的具体用途应该还是过滤，类似于过滤条件之类的，相当于一个主语的谓语，所以说会是谓词这个名字。（我是这么理解的）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="谓词 NSPredicate">
+<meta property="og:url" content="http://yongqianvip.github.io/2015/11/05/aboutNSPredicate/index.html">
+<meta property="og:site_name" content="YongQian's Blog">
+<meta property="og:description" content="NSPredicate：谓词
+字面翻译是这个意思，但是我觉得谓词这个词太难以理解了NSPredicate的具体用途应该还是过滤，类似于过滤条件之类的，相当于一个主语的谓语，所以说会是谓词这个名字。（我是这么理解的）">
+<meta property="og:updated_time" content="2016-09-14T07:54:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="谓词 NSPredicate">
+<meta name="twitter:description" content="NSPredicate：谓词
+字面翻译是这个意思，但是我觉得谓词这个词太难以理解了NSPredicate的具体用途应该还是过滤，类似于过滤条件之类的，相当于一个主语的谓语，所以说会是谓词这个名字。（我是这么理解的）">
+  
+    <link rel="alternative" href="/atom.xml" title="YongQian&#39;s Blog" type="application/atom+xml">
+  
+  <meta name="summary" content="&lt;p&gt;NSPredicate：谓词&lt;/p&gt;
+&lt;p&gt;字面翻译是这个意思，但是我觉得谓词这个词太难以理解了&lt;br&gt;&lt;code&gt;NSPredicate&lt;/code&gt;的具体用途应该还是过滤，类似于过滤条件之类的，相当于一个主语的谓语，所以说会是谓词这个名字。（我是这么理解的）&lt;br&gt;">
+  <link rel="shortcut icon" href="/img/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <nav id="menu" class="hide" >
+   <div class="inner flex-row-vertical">
+  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="/" class="avatar"><img src="/img/header.jpeg"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">Yin Yongqian</h5>
+        <a href="mailto:yongqianvip@163.com" title="yongqianvip@163.com" class="mail">yongqianvip@163.com</a>
+      </hgroup>
+    </div>
+  </div>
+  <div class="scroll-wrap flex-col">
+    <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/archives"  >
+              <i class="icon icon-lg icon-archives"></i>
+              博客
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              标签
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/yongqianvip" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="http://www.weibo.com/3069749675" target="_blank" >
+              <i class="icon icon-lg icon-weibo"></i>
+              微博
+            </a>
+          </li>
+      
+    </ul>
+
+    <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>YongQian&#39;s Blog &copy; 2016</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+  </div>
+</div>
+
+  </nav>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">谓词 NSPredicate</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">谓词 NSPredicate</h1>
+    <h5 class="subtitle">
+        
+            <time datetime="2015-11-05T07:07:25.000Z" itemprop="datePublished" class="page-time">
+  2015-11-05
+</time>
+
+
+        
+    </h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      <article id="post-aboutNSPredicate" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meta flex-row">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+
+    </div>
+    <div class="post-body">
+        <aside class="post-widget" id="post-widget">
+
+            
+            <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+            
+
+            
+            <nav class="post-toc-wrap" id="post-toc">
+            
+            </nav>
+            
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" id="post-content" itemprop="postContent">
+            <p>NSPredicate：谓词</p>
+<p>字面翻译是这个意思，但是我觉得谓词这个词太难以理解了<br><code>NSPredicate</code>的具体用途应该还是过滤，类似于过滤条件之类的，相当于一个主语的谓语，所以说会是谓词这个名字。（我是这么理解的）<br><a id="more"></a></p>
+<p><a href="http://blog.csdn.net/lmf208/article/details/38345321" target="_blank" rel="external">原文在这里(http://blog.csdn.net/lmf208/article/details/38345321)</a></p>
+<p><code>NSPredicate</code>的创建<br>我们看到创建谓词使用类方法</p>
+<pre><code>predicateWithFormat: (NSString *)format
+</code></pre><p><code>format</code> 里的东西真的和<code>SQL</code>的<code>where</code>条件差不多。另外，参数<code>format</code> 与<code>NSLog</code> 的格式化模版差不多，如果 1 和<br>188.0 是传递过来的参数，你可以写成如下的形式：</p>
+<pre><code>@&quot;pid&gt;%d and height&lt;%f&quot;,1,188.0
+</code></pre><p><code>NSPredicate</code>中主要的几种运算方式</p>
+<ul>
+<li><p>1.比较运算符 <code>&gt; 、&lt; 、== 、 &gt;= 、&lt;= 、 !=</code><br>例：<code>@&quot;number &gt;= 99&quot;</code></p>
+</li>
+<li><p>2.逻辑运算符：<code>AND</code>、<code>OR</code>、<code>NOT</code> 这几个运算符计算并、或、非的结果。</p>
+</li>
+<li><p>3.范围运算符：<code>IN</code> 、<code>BETWEEN</code><br>例：</p>
+</li>
+</ul>
+<pre><code>@&quot;number BETWEEN {1,5}&quot;
+@&quot;address IN {&apos;shanghai&apos;,&apos;nanjing&apos;}&quot;
+</code></pre><ul>
+<li>4.字符串本身:SELF 例：</li>
+</ul>
+<pre><code>@&quot;SELF == &apos;APPLE&apos;&quot;
+</code></pre><ul>
+<li>5.字符串相关：<code>BEGINSWITH</code>、<code>ENDSWITH</code>、<code>CONTAINS</code><br>例： </li>
+</ul>
+<pre><code>@&quot;name CONTAIN[cd] &apos;ang&apos;&quot; //包含某个字符串
+@&quot;name BEGINSWITH[c] &apos;sh&apos;&quot; //以某个字符串开头
+@&quot;name ENDSWITH[d] &apos;ang&apos;&quot; //以某个字符串结束
+
+注:`[c]`不区分大小写 , `[d]`不区分发音符号即没有重音符号 , `[cd]`既不区分大小写，也不区分发音符号。
+</code></pre><ul>
+<li>6.通配符：LIKE<br>例：</li>
+</ul>
+<pre><code>@&quot;name LIKE[cd] &apos;*er*&apos;&quot; 
+// * 代表通配符,Like也接[cd].
+@&quot;name LIKE[cd] &apos;???er*&apos;&quot;`
+</code></pre><ul>
+<li>7.正则表达式：<code>MATCHES</code><br>例：</li>
+</ul>
+<pre><code>NSString *regex = @&quot;^A.+e$&quot;; 
+//以A开头，e结尾
+@&quot;name MATCHES %@&quot;,regex
+</code></pre><hr>
+<p>如何使用<code>NSPredicate</code>对一个自定义实体进行筛选<br><code>NSPredicate</code>我暂时都是用于过滤的，否则我们过滤就需要自己写判断 写循环，去判断输出了。<br>接下来就上代码和例子吧。<br>建立一个实体类<br>Dog</p>
+<pre><code>@property (copy   , nonatomic) NSString* name; 
+@property (assign , nonatomic) int       age ;
+//这样我们就有一个类了
+//我们创建 5只Dog的实体
+Dog * dog1=[Dog news];
+dog1.name=@&quot;这是第一只Dog&quot;;dog1.age=@&quot;11&quot;;
+Dog * dog2=[Dog news];
+dog2.name=@&quot;这是第二只Dog&quot;;
+dog2.age=@&quot;22&quot;;
+Dog * dog3=[Dog news];
+dog3.name=@&quot;这是第三只Dog&quot;;
+dog3.age=@&quot;33&quot;;
+Dog * dog4=[Dog news];
+dog4.name=@&quot;这是第四只Dog&quot;;
+dog4.age=@&quot;44&quot;;
+Dog * dog5=[Dog news];
+dog5.name=@&quot;这是第五只Dog&quot;;
+dog5.age=@&quot;55&quot;;
+</code></pre><p>不要吐槽我的Dogs的年龄 → 。→<br>然后我们需要一个Array把他们都装进去</p>
+<pre><code>NSArray * dogArr=@[dog1,dog2,dog3,dog4,dog5];
+</code></pre><p>酱紫所有的Dog都装到一个数组里了使用<code>NSPredicate</code>的筛选没有使用<code>NSPredicate</code>的筛选应该大家都会写，循环+判断。。。<br>使用<code>NSPredicate</code>的筛选具体使用的代码</p>
+<pre><code>//创建谓词的对象 谓词条件是基于KVC的，所以需要说明一点，加入Dog里面有个属性是Doginfo指向Doginfo类，
+//在使用的时候 我们的条件就要写成Doginfo.xxx了。
+NSPredicate* predicate = [NSPredicate predicateWithFormat:@&quot;name==&apos;这是第一只Dog&apos; AND age ==11&quot;];
+for(Dog * d in dogArr)
+{
+    if([predicate evaluateWithObject:d])
+    {
+        NSLog(d.name);
+    }
+}
+</code></pre><p>以上的代码打印出来的结果就是 这是第一只<code>Dog
+NSPredicate</code>筛选一个对象逻辑还是很清晰的，不过这里比较麻烦的就是 还有一个循环，这里我们会发现数组提供了一个方法可以更方便的检索数组对象<br>直接筛选出一个符合谓词的新数组。</p>
+<pre><code>NSPredicate *pre = [NSPredicate predicateWithFormat:@&quot;age &gt;11&quot;];
+NSMutableArray *arrayPre=[dogArr filteredArrayUsingPredicate: pre];
+</code></pre><p><code>arrayPre</code>里面的对象就会是 除了dog1之外的所有的dog。（至于为什么看我的条件…）</p>
+<p>看到这里发现NSPredicate 可以用于自定义的实体的检索、筛选，那如果用于 <code>NSString</code>，<code>NSInteger</code>，<code>bool</code>呢？那我们再看一段代码吧</p>
+<pre><code>NSArray *arrays=[NSArray arrayWithObjects: @&quot;Apple&quot;, @&quot;Google&quot;, @&quot;MircoSoft&quot;, nil];
+NSPredicate *pre2 = [NSPredicate predicateWithFormat:@&quot;SELF==&apos;Apple&apos;&quot;];
+</code></pre><p>上面这段代码是匹配字符串的时候 NSPredicate 需要如何声明<br>使用NSPredicate在两个数组之间进行差异筛选</p>
+<pre><code>NSArray* array = @[@&quot;aa&quot;,@&quot;bb&quot;];
+NSArray* array2 = @[@&quot;aa&quot;,@&quot;bb&quot;,@&quot;cc&quot;,@&quot;dd&quot;];
+NSPredicate* thePredicate = [NSPredicate predicateWithFormat:@&quot;NOT(SELF in %@)&quot;,array];
+NSArray* arr3 = [array2 filteredArrayUsingPredicate:thePredicate];
+NSLog(@&quot;%@&quot;,arr3);
+</code></pre><p>上面的代码输出结果 </p>
+<pre><code>arr3={@&quot;cc&quot; ,@&quot;dd&quot;}
+</code></pre><p>这样大家就很容易理解了<br>SELF在前面有介绍过 可以往回翻阅一下<br>如何使用正则筛选一个数组</p>
+<pre><code>NSString *regex = @&quot;^A.+e$&quot;;//以A 开头，以e 结尾的字符。
+NSPredicate *pre= [NSPredicate predicateWithFormat:@&quot;SELF MATCHES %@&quot;, regex];
+if([pre evaluateWithObject: @&quot;Apple&quot;]){
+    printf(&quot;YES\n&quot;);
+}else{
+    printf(&quot;NO\n&quot;);
+}
+</code></pre><p>关于<code>NSPredicate</code>的其他说明和注意事项，以及技巧<br>动态属性名<br>假如你的代码如下</p>
+<pre><code>NSPredicate *p = [NSPredicate predicateWithFormat:@&quot;name = %@&quot;, @&quot;name1&quot;]; 
+</code></pre><p>显然代码没有任何问题，但是这个不是最好的写法, 我建议如下写法：</p>
+<pre><code>NSPredicate *preTemplate = [NSPredicate predicateWithFormat:@&quot;name==$NAME&quot;];
+NSDictionary *dic=[NSDictionary dictionaryWithObjectsAndKeys:
+@&quot;name1&quot;, @&quot;NAME&quot;,nil];
+NSPredicate *pre=[preTemplate predicateWithSubstitutionVariables: dic];
+</code></pre><p>这样看上去可能会让代码逻辑更清晰。<br>当过滤条件字段都是动态的时候</p>
+<pre><code>NSString *key = @&quot;name&quot;;     
+NSString *value = @&quot;name1&quot;;      
+NSPredicate *p = [NSPredicate predicateWithFormat:@&quot;%@ = %@&quot;, key, value];
+</code></pre><p>然后当你执行到第三行的时候代码就会报错！<br>逻辑上没错误啊！！！为什么会出错呢？<br><code>NSPredicate</code>要自动添加引号，所以最后得到的格式应该是</p>
+<pre><code>@&quot;&apos;name&apos; = &apos;name1&apos;&quot;。
+</code></pre><p>明显不对。要做的就是:</p>
+<pre><code>NSPredicate *p = [NSPredicate predicateWithFormat:@&quot;%K = %@&quot;, key, value]; 
+</code></pre><p>总结<code>NSPredicate</code> 的简单的使用就介绍到这里，这里有些都是从网络上其他人的额博客转过来的内容，我自己加以修改和一些自己的理解。希望可以帮到大家。</p>
+
+
+            
+            <div class="post-reward">
+                <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+            </div>
+            
+            
+            <blockquote>
+                <p>
+                本文地址：
+                <a href="http://yongqianvip.github.io/2015/11/05/aboutNSPredicate/" target="_blank" rel="external">http://yongqianvip.github.io/2015/11/05/aboutNSPredicate/</a>
+                </p>
+                <footer><cite><a href="http://yongqianvip.github.io">@YongQian's Blog</a></cite></footer>
+            </blockquote>
+            </div>
+            
+<nav class="post-nav">
+  
+    <div class="waves-block waves-effect prev fl">
+      <a href="/2015/12/01/gulpReadme/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Gulp 自动任务管理工具</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next fr">
+      <a href="/2015/08/18/iOS_loadGif/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">iOS中加载Gif图的正确姿势</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="aboutNSPredicate" data-title="谓词 NSPredicate" data-url="http://yongqianvip.github.io/2015/11/05/aboutNSPredicate/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"yongqian"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+        </div>
+    </div>
+</article>
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>
+var BLOG_SHARE = {
+    title: "谓词 NSPredicate",
+    pic: "/img/header.jpeg",
+    summary: document.getElementsByName('summary')[0].content,
+    url: "http://yongqianvip.github.io/2015/11/05/aboutNSPredicate/index.html"
+};
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        🤗🤗5毛钱也是爱🤗🤗
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</script>
+
+<script src="/js/search.js"></script>
+
+
+
+
+
+<script src="//s95.cnzz.com/z_stat.php?id=1260387689&web_id=1260387689"></script>
+
+
+
+
+
+</body>
+</html>

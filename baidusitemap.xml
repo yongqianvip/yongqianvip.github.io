@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+  <url>
+    <loc>http://yongqianvip.github.io/2014/04/03/uiwebview/</loc>
+    <lastmod>2016-09-18T02:46:38.000Z</lastmod>
+    <data>
+        <display>
+        <title>UIWebView背景颜色的设置 webview加载html文本 禁用webview长按</title>
+        <pubTime>2014-04-03T07:07:25.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yongqianvip.github.io/2016/09/09/aws_vpn/</loc>
+    <lastmod>2016-09-14T13:12:57.000Z</lastmod>
+    <data>
+        <display>
+        <title>没有迈不过去的坎，也没有翻不过去的墙</title>
+        <pubTime>2016-09-09T07:07:25.000Z</pubTime>
+        
+        <tag>VPN</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://yongqianvip.github.io/2015/11/05/aboutNSPredicate/</loc>
+    <lastmod>2016-09-14T07:54:29.000Z</lastmod>
+    <data>
+        <display>
+        <title>谓词 NSPredicate</title>
+        <pubTime>2015-11-05T07:07:25.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yongqianvip.github.io/2016/05/01/LaunchTime/</loc>
+    <lastmod>2016-09-14T07:52:19.000Z</lastmod>
+    <data>
+        <display>
+        <title>你的App几秒钟完成启动？</title>
+        <pubTime>2016-05-01T07:07:25.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yongqianvip.github.io/2016/08/26/iOS_Tips/</loc>
+    <lastmod>2016-09-14T02:31:17.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS开发技巧</title>
+        <pubTime>2016-08-26T07:07:25.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yongqianvip.github.io/2014/10/11/XcodeExtension/</loc>
+    <lastmod>2016-09-13T08:40:33.000Z</lastmod>
+    <data>
+        <display>
+        <title>为Xcode添加Empty Application、category、protocol等模板</title>
+        <pubTime>2014-10-11T07:07:25.000Z</pubTime>
+        
+        <tag>Xcode</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yongqianvip.github.io/2014/11/13/getUDID/</loc>
+    <lastmod>2016-09-13T08:39:55.000Z</lastmod>
+    <data>
+        <display>
+        <title>获取iOS设备的UDID</title>
+        <pubTime>2014-11-13T07:07:25.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yongqianvip.github.io/2015/05/10/uialertviewcontroller_base/</loc>
+    <lastmod>2016-09-13T08:38:06.000Z</lastmod>
+    <data>
+        <display>
+        <title>UIAlertView 和 UIAlertViewController之间的抉择</title>
+        <pubTime>2015-05-10T07:07:25.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yongqianvip.github.io/2015/08/18/iOS_loadGif/</loc>
+    <lastmod>2016-09-13T08:37:37.000Z</lastmod>
+    <data>
+        <display>
+        <title>iOS中加载Gif图的正确姿势</title>
+        <pubTime>2015-08-18T07:07:25.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yongqianvip.github.io/2015/12/01/gulpReadme/</loc>
+    <lastmod>2016-09-13T08:33:54.000Z</lastmod>
+    <data>
+        <display>
+        <title>Gulp 自动任务管理工具</title>
+        <pubTime>2015-12-01T07:07:25.000Z</pubTime>
+        
+        <tag>gulp</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yongqianvip.github.io/2015/12/02/creatPodspec/</loc>
+    <lastmod>2016-09-13T08:30:31.000Z</lastmod>
+    <data>
+        <display>
+        <title>创建podspec文件，为自己的项目添加pod支持</title>
+        <pubTime>2015-12-02T07:07:25.000Z</pubTime>
+        
+        <tag>CocoaPods</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yongqianvip.github.io/2015/12/10/learnMarkdown/</loc>
+    <lastmod>2016-09-13T08:28:59.000Z</lastmod>
+    <data>
+        <display>
+        <title>初识Markdown</title>
+        <pubTime>2015-12-10T07:07:25.000Z</pubTime>
+        
+        <tag>Markdown</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yongqianvip.github.io/2016/07/31/RN-ListViewLoadMore/</loc>
+    <lastmod>2016-09-13T08:23:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>React-Native中处理ListView的上拉加载更多</title>
+        <pubTime>2016-07-31T07:07:25.000Z</pubTime>
+        
+        <tag>React-Native</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yongqianvip.github.io/2016/08/01/RNNavigationBar/</loc>
+    <lastmod>2016-09-13T08:21:45.000Z</lastmod>
+    <data>
+        <display>
+        <title>Reat-Native中使用Navigatior和自定义NavigationBar</title>
+        <pubTime>2016-08-01T07:07:25.000Z</pubTime>
+        
+        <tag>React-Native</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yongqianvip.github.io/2016/08/03/RNDemoToast/</loc>
+    <lastmod>2016-09-13T08:21:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>React-Native中通过JS调用原生模块</title>
+        <pubTime>2016-08-03T07:07:25.000Z</pubTime>
+        
+        <tag>React-Native</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yongqianvip.github.io/2016/08/16/RN_TabBar/</loc>
+    <lastmod>2016-09-13T08:15:31.000Z</lastmod>
+    <data>
+        <display>
+        <title>React-Native项目中使用TabBar</title>
+        <pubTime>2016-08-16T07:07:25.000Z</pubTime>
+        
+        <tag>React-Native</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yongqianvip.github.io/2016/08/24/RN_Xcode_Can'tFindNode/</loc>
+    <lastmod>2016-09-13T08:00:22.000Z</lastmod>
+    <data>
+        <display>
+        <title>解决Xcode编译报错：Can't find 'node' binary to build React Native bundle</title>
+        <pubTime>2016-08-24T07:07:25.000Z</pubTime>
+        
+        <tag>React-Native</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yongqianvip.github.io/2016/08/26/RN_iconfont/</loc>
+    <lastmod>2016-09-13T07:57:36.000Z</lastmod>
+    <data>
+        <display>
+        <title>React-Native设置自定义字体文件</title>
+        <pubTime>2016-08-26T07:07:25.000Z</pubTime>
+        
+        <tag>React-Native</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yongqianvip.github.io/2015/03/15/RecreatRebuild/</loc>
+    <lastmod>2016-09-13T07:34:19.000Z</lastmod>
+    <data>
+        <display>
+        <title><<重构是改革,重写是革命>></title>
+        <pubTime>2015-03-15T07:07:25.000Z</pubTime>
+        
+        <tag>经验</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yongqianvip.github.io/2015/02/15/tableViewHeaderFooterView/</loc>
+    <lastmod>2016-09-13T07:34:19.000Z</lastmod>
+    <data>
+        <display>
+        <title>UITableView去掉headerView和footerView的粘性,随tableview滚动(有瑕疵)</title>
+        <pubTime>2015-02-15T07:07:25.000Z</pubTime>
+        
+        <tag>iOS</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+</urlset>

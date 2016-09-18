@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>初识Markdown | YongQian&#39;s Blog | 不积跬步无以至千里</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="Markdown">
+  <meta name="description" content="什么是Markdown?Markdown 是一种轻量级的 标记语言，已经成为一种适用于网络的书写语言。目前已经有很多网站开始支持Markdown文字录入，比如简书， CSDN博客， 我比较喜欢Markdown的优点是它可以导出html格式的文件在网站上发布，可以导出pdf格式文件，甚至你可以用它来写简历……
+Markdown虽说算是一门语言，但它的语法真的很简单，常用的也不过十多种，很容易上手，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初识Markdown">
+<meta property="og:url" content="http://yongqianvip.github.io/2015/12/10/learnMarkdown/index.html">
+<meta property="og:site_name" content="YongQian's Blog">
+<meta property="og:description" content="什么是Markdown?Markdown 是一种轻量级的 标记语言，已经成为一种适用于网络的书写语言。目前已经有很多网站开始支持Markdown文字录入，比如简书， CSDN博客， 我比较喜欢Markdown的优点是它可以导出html格式的文件在网站上发布，可以导出pdf格式文件，甚至你可以用它来写简历……
+Markdown虽说算是一门语言，但它的语法真的很简单，常用的也不过十多种，很容易上手，">
+<meta property="og:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/cool_cat.jpg">
+<meta property="og:image" content="http://yongqian.sinaapp.com/blog/img/md_title.png">
+<meta property="og:image" content="http://yongqian.sinaapp.com/blog/img/md_code.png">
+<meta property="og:image" content="http://yongqian.sinaapp.com/blog/img/md_list.png">
+<meta property="og:image" content="http://yongqian.sinaapp.com/blog/img/151202/caoyuan.jpeg">
+<meta property="og:updated_time" content="2016-09-13T08:28:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初识Markdown">
+<meta name="twitter:description" content="什么是Markdown?Markdown 是一种轻量级的 标记语言，已经成为一种适用于网络的书写语言。目前已经有很多网站开始支持Markdown文字录入，比如简书， CSDN博客， 我比较喜欢Markdown的优点是它可以导出html格式的文件在网站上发布，可以导出pdf格式文件，甚至你可以用它来写简历……
+Markdown虽说算是一门语言，但它的语法真的很简单，常用的也不过十多种，很容易上手，">
+<meta name="twitter:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/cool_cat.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="YongQian&#39;s Blog" type="application/atom+xml">
+  
+  <meta name="summary" content="&lt;p&gt;&lt;img src=&quot;http://7xp7q7.com1.z0.glb.clouddn.com/cool_cat.jpg&quot; alt=&quot;miao&quot;&gt;&lt;/p&gt;
+&lt;h2 id=&quot;什么是Markdown&quot;&gt;&lt;a href=&quot;#什么是Markdown&quot; class=&quot;headerlink&quot; title=&quot;什么是Markdown?&quot;&gt;&lt;/a&gt;什么是Markdown?&lt;/h2&gt;&lt;p&gt;Markdown 是一种轻量级的 &lt;code&gt;标记语言&lt;/code&gt;，已经成为一种适用于网络的书写语言。目前已经有很多网站开始支持Markdown文字录入，比如简书， CSDN博客， 我比较喜欢Markdown的优点是它可以导出html格式的文件在网站上发布，可以导出pdf格式文件，甚至你可以用它来写简历……&lt;/p&gt;
+&lt;p&gt;Markdown虽说算是一门语言，但它的语法真的很简单，常用的也不过十多种，很容易上手，而且一旦熟悉了它的语法，你会发现网络写作原来这么随意.&lt;/p&gt;">
+  <link rel="shortcut icon" href="/img/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <nav id="menu" class="hide" >
+   <div class="inner flex-row-vertical">
+  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="/" class="avatar"><img src="/img/header.jpeg"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">Yin Yongqian</h5>
+        <a href="mailto:yongqianvip@163.com" title="yongqianvip@163.com" class="mail">yongqianvip@163.com</a>
+      </hgroup>
+    </div>
+  </div>
+  <div class="scroll-wrap flex-col">
+    <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/archives"  >
+              <i class="icon icon-lg icon-archives"></i>
+              博客
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              标签
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/yongqianvip" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="http://www.weibo.com/3069749675" target="_blank" >
+              <i class="icon icon-lg icon-weibo"></i>
+              微博
+            </a>
+          </li>
+      
+    </ul>
+
+    <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>YongQian&#39;s Blog &copy; 2016</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+  </div>
+</div>
+
+  </nav>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">初识Markdown</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">初识Markdown</h1>
+    <h5 class="subtitle">
+        
+            <time datetime="2015-12-10T07:07:25.000Z" itemprop="datePublished" class="page-time">
+  2015-12-10
+</time>
+
+
+        
+    </h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      <article id="post-learnMarkdown" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meta flex-row">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Markdown/">Markdown</a></li></ul>
+
+    </div>
+    <div class="post-body">
+        <aside class="post-widget" id="post-widget">
+
+            
+            <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+            
+
+            
+            <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#什么是Markdown"><span class="post-toc-text">什么是Markdown?</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Markdown怎么用"><span class="post-toc-text">Markdown怎么用?</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#标题"><span class="post-toc-text">标题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#代码"><span class="post-toc-text">代码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#列表"><span class="post-toc-text">列表</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#加粗-和-斜体"><span class="post-toc-text">加粗 和 斜体</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#外链"><span class="post-toc-text">外链</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#图片"><span class="post-toc-text">图片</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#引用"><span class="post-toc-text">引用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#脚注"><span class="post-toc-text">脚注</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#表格"><span class="post-toc-text">表格</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Markdown编辑器"><span class="post-toc-text">Markdown编辑器</span></a></li></ol>
+            </nav>
+            
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" id="post-content" itemprop="postContent">
+            <p><img src="http://7xp7q7.com1.z0.glb.clouddn.com/cool_cat.jpg" alt="miao"></p>
+<h2 id="什么是Markdown"><a href="#什么是Markdown" class="headerlink" title="什么是Markdown?"></a>什么是Markdown?</h2><p>Markdown 是一种轻量级的 <code>标记语言</code>，已经成为一种适用于网络的书写语言。目前已经有很多网站开始支持Markdown文字录入，比如简书， CSDN博客， 我比较喜欢Markdown的优点是它可以导出html格式的文件在网站上发布，可以导出pdf格式文件，甚至你可以用它来写简历……</p>
+<p>Markdown虽说算是一门语言，但它的语法真的很简单，常用的也不过十多种，很容易上手，而且一旦熟悉了它的语法，你会发现网络写作原来这么随意.</p>
+<a id="more"></a>
+<h2 id="Markdown怎么用"><a href="#Markdown怎么用" class="headerlink" title="Markdown怎么用?"></a>Markdown怎么用?</h2><p>以下就常用的几点做简要说明，仅供小白用户参考， 大神请绕行……</p>
+<ul>
+<li><h3 id="标题"><a href="#标题" class="headerlink" title="标题"></a><strong>标题</strong></h3><p>  设置标题很简单，你只需要在你要设置为标题的文本前加 “#”即可，一级标题”#”，二级标题”##”…  最多支持六级标题”######”</p>
+<p>  <img src="http://yongqian.sinaapp.com/blog/img/md_title.png" alt="markdowm_title"></p>
+</li>
+<li><h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a><strong>代码</strong></h3><p>  添加内嵌代码可以使用一对回勾号” ` “ 包裹一段内嵌代码  </p>
+<p>  如<code>这是内嵌代码</code><br>  对于插入代码， 标准Markdown基于缩进代码行或者4个空格位;这让你不用关心代码用的什么语言就可以以较好的格式展示你的代码，缺点是没有代码高亮</p>
+<p>  <img src="http://yongqian.sinaapp.com/blog/img/md_code.png" alt="markdowm_code"></p>
+</li>
+</ul>
+<ul>
+<li><h3 id="列表"><a href="#列表" class="headerlink" title="列表"></a><strong>列表</strong></h3><p>  列表分有序列表和无序列表，写法也相当简单</p>
+<p>  <img src="http://yongqian.sinaapp.com/blog/img/md_list.png" alt="markdowm_code"></p>
+</li>
+</ul>
+<ul>
+<li><h3 id="加粗-和-斜体"><a href="#加粗-和-斜体" class="headerlink" title="加粗 和 斜体"></a><strong>加粗</strong> 和 <em>斜体</em></h3><p>  <code>**字体加粗**</code> —&gt; <strong>字体加粗</strong></p>
+<p>  <code>* 斜体 *</code> –&gt; <em>斜体</em></p>
+</li>
+<li><h3 id="外链"><a href="#外链" class="headerlink" title="外链"></a><strong>外链</strong></h3><p>  格式: <code>[title](http://)</code><br>  例如  </p>
+</li>
+</ul>
+<pre><code>[点击查看张北草原的照片](http://yongqian.sinaapp.com/blog/img/151202/caoyuan.jpeg)
+</code></pre><p><a href="http://yongqian.sinaapp.com/blog/img/151202/caoyuan.jpeg" target="_blank" rel="external">点击查看张北草原的照片</a></p>
+<ul>
+<li><h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a><strong>图片</strong></h3><p>  图片跟外链格式类似 不过前边多了一个<code>!</code><br>  格式: <code>![alt](http://)</code><br>  例如</p>
+</li>
+</ul>
+<pre><code>![张北草原的照片](http://yongqian.sinaapp.com/blog/img/151202/caoyuan.jpeg)
+</code></pre><p><img src="http://yongqian.sinaapp.com/blog/img/151202/caoyuan.jpeg" alt="张北草原的照片"></p>
+<ul>
+<li><h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a><strong>引用</strong></h3><p>  使用 <code>&gt;</code> 开头 表示引用  </p>
+<blockquote>
+<p>这是引用部分  引用了某位大神的文章<br>  感谢这位大神<br>  向大神致敬</p>
+</blockquote>
+</li>
+<li><h3 id="脚注"><a href="#脚注" class="headerlink" title="脚注"></a><strong>脚注</strong></h3><p>  在正文中，如果参考了某些资料或想要单独对某一词语做解释可以添加脚注<br>  例如 <code>什么是Markdown[^1]，Markdown就是一门语言[^2]</code> </p>
+<p>  什么是Markdown<a href="Markdown就是一门语言">^1</a>，Markdown就是一门语言<a href="语言指的是语法">^2</a></p>
+<p>  与此同时在文章末尾注明脚注内容 </p>
+</li>
+</ul>
+<pre><code>`[^1]: Markdown就是一门语言`
+`[^2]: 语言指的是语法`
+</code></pre><ul>
+<li><h3 id="表格"><a href="#表格" class="headerlink" title="表格"></a><strong>表格</strong></h3><p>  之所以把表格放在最后边，是因为我觉得用Markdown写表格太DD疼了<br>  注意:冒号决定表格中内容<code>水平对齐方式</code></p>
+</li>
+</ul>
+<pre><code>| 姓名       | 年龄       | 身高     | 体重
+| ---       | :---:     | :--      | --:
+| 默认左对齐  | 冒号在两端  | 冒号在左  | 冒号在右
+| ZDD      | 18         | 170       | 50
+| YYQ      | 19         | 180      | 80
+</code></pre><table>
+<thead>
+<tr>
+<th>姓名</th>
+<th style="text-align:center">年龄</th>
+<th style="text-align:left">身高</th>
+<th style="text-align:right">体重</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>默认左对齐</td>
+<td style="text-align:center">居中对齐</td>
+<td style="text-align:left">左对齐</td>
+<td style="text-align:right">右对齐</td>
+</tr>
+<tr>
+<td>ZDD</td>
+<td style="text-align:center">18</td>
+<td style="text-align:left">17000000</td>
+<td style="text-align:right">500000</td>
+</tr>
+<tr>
+<td>YYQ</td>
+<td style="text-align:center">19</td>
+<td style="text-align:left">180</td>
+<td style="text-align:right">80</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Markdown编辑器"><a href="#Markdown编辑器" class="headerlink" title="Markdown编辑器"></a>Markdown编辑器</h2><ul>
+<li><p>Mac OS</p>
+<p>  <a href="http://www.macupdate.com/app/mac/40420/mou" target="_blank" rel="external">Mou</a><br>  MacDown?</p>
+</li>
+<li><p>Windows</p>
+<p>  没用过没有发言权， 请自行Baidu或Google  ^_^</p>
+</li>
+</ul>
+<hr>
+
+
+            
+            <div class="post-reward">
+                <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+            </div>
+            
+            
+            <blockquote>
+                <p>
+                本文地址：
+                <a href="http://yongqianvip.github.io/2015/12/10/learnMarkdown/" target="_blank" rel="external">http://yongqianvip.github.io/2015/12/10/learnMarkdown/</a>
+                </p>
+                <footer><cite><a href="http://yongqianvip.github.io">@YongQian's Blog</a></cite></footer>
+            </blockquote>
+            </div>
+            
+<nav class="post-nav">
+  
+    <div class="waves-block waves-effect prev fl">
+      <a href="/2016/05/01/LaunchTime/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">你的App几秒钟完成启动？</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next fr">
+      <a href="/2015/12/02/creatPodspec/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">创建podspec文件，为自己的项目添加pod支持</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="learnMarkdown" data-title="初识Markdown" data-url="http://yongqianvip.github.io/2015/12/10/learnMarkdown/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"yongqian"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+        </div>
+    </div>
+</article>
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>
+var BLOG_SHARE = {
+    title: "初识Markdown",
+    pic: "/img/header.jpeg",
+    summary: document.getElementsByName('summary')[0].content,
+    url: "http://yongqianvip.github.io/2015/12/10/learnMarkdown/index.html"
+};
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        🤗🤗5毛钱也是爱🤗🤗
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</script>
+
+<script src="/js/search.js"></script>
+
+
+
+
+
+<script src="//s95.cnzz.com/z_stat.php?id=1260387689&web_id=1260387689"></script>
+
+
+
+
+
+</body>
+</html>

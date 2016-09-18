@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>创建podspec文件，为自己的项目添加pod支持 | YongQian&#39;s Blog | 不积跬步无以至千里</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="CocoaPods">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="创建podspec文件，为自己的项目添加pod支持">
+<meta property="og:url" content="http://yongqianvip.github.io/2015/12/02/creatPodspec/index.html">
+<meta property="og:site_name" content="YongQian's Blog">
+<meta property="og:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/zhangbei_richu.JPG">
+<meta property="og:updated_time" content="2016-09-13T08:30:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="创建podspec文件，为自己的项目添加pod支持">
+<meta name="twitter:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/zhangbei_richu.JPG">
+  
+    <link rel="alternative" href="/atom.xml" title="YongQian&#39;s Blog" type="application/atom+xml">
+  
+  <meta name="summary" content="&lt;p&gt;&lt;img src=&quot;http://7xp7q7.com1.z0.glb.clouddn.com/zhangbei_richu.JPG&quot; alt=&quot;top_iamge&quot;&gt;&lt;br&gt;">
+  <link rel="shortcut icon" href="/img/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <nav id="menu" class="hide" >
+   <div class="inner flex-row-vertical">
+  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="/" class="avatar"><img src="/img/header.jpeg"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">Yin Yongqian</h5>
+        <a href="mailto:yongqianvip@163.com" title="yongqianvip@163.com" class="mail">yongqianvip@163.com</a>
+      </hgroup>
+    </div>
+  </div>
+  <div class="scroll-wrap flex-col">
+    <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/archives"  >
+              <i class="icon icon-lg icon-archives"></i>
+              博客
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              标签
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/yongqianvip" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="http://www.weibo.com/3069749675" target="_blank" >
+              <i class="icon icon-lg icon-weibo"></i>
+              微博
+            </a>
+          </li>
+      
+    </ul>
+
+    <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>YongQian&#39;s Blog &copy; 2016</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+  </div>
+</div>
+
+  </nav>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">创建podspec文件，为自己的项目添加pod支持</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">创建podspec文件，为自己的项目添加pod支持</h1>
+    <h5 class="subtitle">
+        
+            <time datetime="2015-12-02T07:07:25.000Z" itemprop="datePublished" class="page-time">
+  2015-12-02
+</time>
+
+
+        
+    </h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      <article id="post-creatPodspec" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meta flex-row">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CocoaPods/">CocoaPods</a></li></ul>
+
+    </div>
+    <div class="post-body">
+        <aside class="post-widget" id="post-widget">
+
+            
+            <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+            
+
+            
+            <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#开篇扯淡"><span class="post-toc-text">开篇扯淡</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#开始"><span class="post-toc-text">开始</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-上传项目源码"><span class="post-toc-text">1.上传项目源码</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-创建项目的podspec文件"><span class="post-toc-text">2.创建项目的podspec文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-打tag-上传podspec"><span class="post-toc-text">3.打tag 上传podspec</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-最后"><span class="post-toc-text">4.最后</span></a></li></ol></li></ol>
+            </nav>
+            
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" id="post-content" itemprop="postContent">
+            <p><img src="http://7xp7q7.com1.z0.glb.clouddn.com/zhangbei_richu.JPG" alt="top_iamge"><br><a id="more"></a></p>
+<h2 id="开篇扯淡"><a href="#开篇扯淡" class="headerlink" title="开篇扯淡"></a>开篇扯淡</h2><p>作为一个iOS开发者，一定用过CocoaPods吧，没用过?<a href="http://code4app.com/article/cocoapods-install-usage" target="_blank" rel="external">点这儿去面壁吧</a></p>
+<p>Cocoapods作为iOS开发的包管理器，给我们的开发带来了极大的便利，而且越来越多的第三方类库支持Pod，可以通过Pod傻瓜式的集成到自己的工程中，那么问题来了，我自己也有一系列的小工具类，怎么让它也支持pod集成进而让其他朋友方便的使用呢?</p>
+<p>刚好，最近项目不算紧，自己尝试着弄了一下，在这里记录一下尝试的过程， 一来备忘， 二来共享…… </p>
+<p>其实网上这种文章数不胜数，但是不一定都是适合自己的，比如接下来写的东西我觉得都是适用于我的，但未必能适用于正在阅读此文的你，又或者下文中有一部内容能够帮到你，如果真是这样，我也很高兴</p>
+<p>本文有诸多不完善的地方，以后时间充足在慢慢完善吧</p>
+<p>写的不好  砖下留情</p>
+<h2 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h2><p><code>我这里拿一个小demo做示例，目的是把工程中的一些category提取出来支持 pod</code></p>
+<h3 id="1-上传项目源码"><a href="#1-上传项目源码" class="headerlink" title="1.上传项目源码"></a>1.上传项目源码</h3><p>把项目源码上传到gitHub仓库再clone到本地(以iOS_Category为例–<a href="https://github.com/yongqianvip/iOS_Category" target="_blank" rel="external">源码在这里</a> )， 如果项目本来就在gitHub的仓库中， 直接clone到本地即可</p>
+<h3 id="2-创建项目的podspec文件"><a href="#2-创建项目的podspec文件" class="headerlink" title="2.创建项目的podspec文件"></a>2.创建项目的podspec文件</h3><ul>
+<li>用终端命令cd到本地项目目录并执行如下命令:</li>
+</ul>
+<pre><code>$ pod spec create iOS_Category
+</code></pre><p>这时候本地就生成一个iOS_Category.podspec文件</p>
+<ul>
+<li>用编辑器打开.podspec文件 (我自己用Sublime Text) </li>
+</ul>
+<p>删除不必要的注释(这里只简单介绍基本用法，所以只用到一部分必须得字段 更多字段请移步<a href="http://guides.cocoapods.org/syntax/podspec.html" target="_blank" rel="external">http://guides.cocoapods.org/syntax/podspec.html</a>)</p>
+<pre><code>Pod::Spec.new do |s|
+  s.name         = &quot;iOS_Category&quot;
+  s.version      = &quot;0.0.1&quot;
+  s.summary      = &quot;all kinds of categories for iOS develop&quot;
+  s.description  = &lt;&lt;-DESC
+                      this project provide all kinds of categories for iOS developer 
+                   DESC
+  s.homepage     = &quot;https://github.com/yongqianvip/iOS_Category&quot;
+  s.license      = &quot;MIT&quot;
+  s.license      = { :type =&gt; &quot;MIT&quot;， :file =&gt; &quot;LICENSE&quot; }
+  s.author             = { &quot;yongqianvip&quot; =&gt; &quot;yongqianvip@163.com&quot; }
+  s.platform     = :ios
+  s.source       = { :git =&gt; &quot;https://github.com/yongqianvip/iOS_Category.git&quot;， :tag =&gt; &quot;0.0.1&quot; }
+  s.source_files  = &quot;Classes&quot;， &quot;iOS_Category/Classes/**/*.{h，m}&quot;
+  s.exclude_files = &quot;Classes/Exclude&quot;
+  s.public_header_files = &quot;iOS_Category/Classes/UIKit/UI_Categories.h&quot;，&quot;iOS_Category/Classes/Foundation/Foundation_Category.h&quot;，&quot;iOS_Category/Classes/**/*.h&quot;
+  s.requires_arc = true
+end
+</code></pre><ul>
+<li>验证podspec文件</li>
+</ul>
+<p>编辑完podspec文件后需要验证一下这个文件是否可用podspec文件不允许有任何的<code>Warning</code>或者<code>Error</code><br>    执行命令</p>
+<pre><code>$ pod lib lint
+</code></pre><p>如果出现</p>
+<pre><code>-&gt; iOS_Category (0.0.1)
+
+iOS_Category passed validation.
+</code></pre><p>则说明验证通过， 否则， 根据提示修改podspec文件再次验证直到验证通过</p>
+<p>附带说一下，Xcode允许警告存在，所以可以通过命令屏蔽警告</p>
+<pre><code>$ pod lib lint --allow-warnings
+</code></pre><p>如果出现Error但是提示信息不足，可以添加<code>--verbose</code> 以获取更多错误信息</p>
+<pre><code>$ pod lib lint --verbose
+</code></pre><h3 id="3-打tag-上传podspec"><a href="#3-打tag-上传podspec" class="headerlink" title="3.打tag 上传podspec"></a>3.打tag 上传podspec</h3><p>podspec文件中需要指定的tag， 完成上述操作后给项目打tag</p>
+<pre><code>$ git tag -m&quot;first release iOS_Category with podspec&quot; &quot;0.0.1&quot;
+$ git push --tags
+</code></pre><p>最后使用<code>pod trunk</code>命令，把podspec文件推送到CocoaPod官方库</p>
+<p><code>pod trunk</code> 需要注册  具体做法这里不再赘述 请移步<a href="https://guides.cocoapods.org/making/getting-setup-with-trunk.html" target="_blank" rel="external">CocoaPod官网</a></p>
+<p><code>pod trunk</code> 设置完毕后执行命令</p>
+<pre><code>$ pod trunk push iOS_Category.podspec
+</code></pre><p>这个过程可能会比较耗时，原因你懂的(实在很慢等不及的话，请自备梯子)</p>
+<h3 id="4-最后"><a href="#4-最后" class="headerlink" title="4.最后"></a>4.最后</h3><p>如果一切顺利</p>
+<pre><code>pod search iOS_Category
+</code></pre><p>就可以找到刚才的项目了 并且还有安装命令&lt; pod ‘iOS_Category’，’~&gt;0.0.1’ &gt;</p>
+
+
+            
+            <div class="post-reward">
+                <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+            </div>
+            
+            
+            <blockquote>
+                <p>
+                本文地址：
+                <a href="http://yongqianvip.github.io/2015/12/02/creatPodspec/" target="_blank" rel="external">http://yongqianvip.github.io/2015/12/02/creatPodspec/</a>
+                </p>
+                <footer><cite><a href="http://yongqianvip.github.io">@YongQian's Blog</a></cite></footer>
+            </blockquote>
+            </div>
+            
+<nav class="post-nav">
+  
+    <div class="waves-block waves-effect prev fl">
+      <a href="/2015/12/10/learnMarkdown/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">初识Markdown</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next fr">
+      <a href="/2015/12/01/gulpReadme/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Gulp 自动任务管理工具</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="creatPodspec" data-title="创建podspec文件，为自己的项目添加pod支持" data-url="http://yongqianvip.github.io/2015/12/02/creatPodspec/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"yongqian"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+        </div>
+    </div>
+</article>
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>
+var BLOG_SHARE = {
+    title: "创建podspec文件，为自己的项目添加pod支持",
+    pic: "/img/header.jpeg",
+    summary: document.getElementsByName('summary')[0].content,
+    url: "http://yongqianvip.github.io/2015/12/02/creatPodspec/index.html"
+};
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        🤗🤗5毛钱也是爱🤗🤗
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</script>
+
+<script src="/js/search.js"></script>
+
+
+
+
+
+<script src="//s95.cnzz.com/z_stat.php?id=1260387689&web_id=1260387689"></script>
+
+
+
+
+
+</body>
+</html>
