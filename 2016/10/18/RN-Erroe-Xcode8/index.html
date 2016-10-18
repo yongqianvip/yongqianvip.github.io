@@ -32,7 +32,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1512008-9a9c4b0bed6b406f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/image/rn/error/rnwebsocket.png">
 <meta property="og:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/image/rn/error/rn_err_apple_mach.png">
-<meta property="og:updated_time" content="2016-10-18T02:21:25.000Z">
+<meta property="og:updated_time" content="2016-10-18T02:22:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="升级Xcode8后 React-Native项目遇到的错误">
 <meta name="twitter:description" content="1  RCTWebSocket Semantic issue
@@ -234,8 +234,8 @@
 </code></pre></li>
 </ul>
 <h2 id="2-nw-connection-get-connected-socket-block-invoke"><a href="#2-nw-connection-get-connected-socket-block-invoke" class="headerlink" title="2 __nw_connection_get_connected_socket_block_invoke"></a>2 __nw_connection_get_connected_socket_block_invoke</h2><p>Xocde控制台不断输出 如下log</p>
-<p>[] __nw_connection_get_connected_socket_block_invoke * Connection has no connected handler</p>
-<ol>
+<pre><code>[] __nw_connection_get_connected_socket_block_invoke * Connection has no connected handler
+</code></pre><ol>
 <li>Xcode menu -&gt; Product -&gt; Edit Scheme…</li>
 <li>Environment Variables -&gt; Add -&gt; Name: “OS_ACTIVITY_MODE”, Value:”disable”</li>
 <li>Run again</li>
