@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>拥抱微信小程序 | YongQian&#39;s Blog | 不积跬步无以至千里</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
+  
+  
+  <meta name="keywords" content="Wechat">
+  <meta name="description" content="2016年国庆前一周，腾讯公布微信小程序开始内测。
+顿时IT圈子沸腾了，更有意思的是，在距离腾讯公布微信小程序开始内测的短短不到24小时的时间内，微信开发者工具被破解，没有内测资格的程序员也可以尝鲜，各个QQ群，微信群瞬间聚集了一大批程序猿热火朝天的讨论着小程序的前景，开发环境，开发过程等话题，由此可见猿猿们对此关注的程度。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="拥抱微信小程序">
+<meta property="og:url" content="http://yongqianvip.github.io/2016/10/10/hugwxxcx/index.html">
+<meta property="og:site_name" content="YongQian's Blog">
+<meta property="og:description" content="2016年国庆前一周，腾讯公布微信小程序开始内测。
+顿时IT圈子沸腾了，更有意思的是，在距离腾讯公布微信小程序开始内测的短短不到24小时的时间内，微信开发者工具被破解，没有内测资格的程序员也可以尝鲜，各个QQ群，微信群瞬间聚集了一大批程序猿热火朝天的讨论着小程序的前景，开发环境，开发过程等话题，由此可见猿猿们对此关注的程度。">
+<meta property="og:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/image/jianshu/wechat.jpg">
+<meta property="og:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/image/wx/vvideo/folder.png">
+<meta property="og:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/image/wx/vvideo/recorder6.gif">
+<meta property="og:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/image/wx/vvideo/vvideo_screen_6.jpg">
+<meta property="og:updated_time" content="2016-10-18T02:39:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="拥抱微信小程序">
+<meta name="twitter:description" content="2016年国庆前一周，腾讯公布微信小程序开始内测。
+顿时IT圈子沸腾了，更有意思的是，在距离腾讯公布微信小程序开始内测的短短不到24小时的时间内，微信开发者工具被破解，没有内测资格的程序员也可以尝鲜，各个QQ群，微信群瞬间聚集了一大批程序猿热火朝天的讨论着小程序的前景，开发环境，开发过程等话题，由此可见猿猿们对此关注的程度。">
+<meta name="twitter:image" content="http://7xp7q7.com1.z0.glb.clouddn.com/image/jianshu/wechat.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="YongQian&#39;s Blog" type="application/atom+xml">
+  
+  <meta name="summary" content="&lt;p&gt;2016年国庆前一周，腾讯公布&lt;strong&gt;微信小程序&lt;/strong&gt;开始内测。&lt;/p&gt;
+&lt;p&gt;顿时IT圈子沸腾了，更有意思的是，在距离腾讯公布微信小程序开始内测的短短不到24小时的时间内，微信开发者工具被破解，没有内测资格的程序员也可以尝鲜，各个QQ群，微信群瞬间聚集了一大批程序猿热火朝天的讨论着小程序的前景，开发环境，开发过程等话题，由此可见猿猿们对此关注的程度。&lt;br&gt;">
+  <link rel="shortcut icon" href="/img/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <nav id="menu" class="hide" >
+   <div class="inner flex-row-vertical">
+  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="/" class="avatar"><img src="/img/header.jpeg"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">Yin Yongqian</h5>
+        <a href="mailto:yongqianvip@163.com" title="yongqianvip@163.com" class="mail">yongqianvip@163.com</a>
+      </hgroup>
+    </div>
+  </div>
+  <div class="scroll-wrap flex-col">
+    <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/archives"  >
+              <i class="icon icon-lg icon-archives"></i>
+              博客
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              标签
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/yongqianvip" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="http://www.weibo.com/3069749675" target="_blank" >
+              <i class="icon icon-lg icon-weibo"></i>
+              微博
+            </a>
+          </li>
+      
+    </ul>
+
+    <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>YongQian&#39;s Blog &copy; 2016</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+  </div>
+</div>
+
+  </nav>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">拥抱微信小程序</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">拥抱微信小程序</h1>
+    <h5 class="subtitle">
+        
+            <time datetime="2016-10-09T16:00:00.000Z" itemprop="datePublished" class="page-time">
+  2016-10-10
+</time>
+
+
+        
+    </h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      <article id="post-hugwxxcx" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meta flex-row">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Wechat/">Wechat</a></li></ul>
+
+    </div>
+    <div class="post-body">
+        <aside class="post-widget" id="post-widget">
+
+            
+            <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+            
+
+            
+            <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#写在前头"><span class="post-toc-text">写在前头</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#跟风作案"><span class="post-toc-text">跟风作案</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#搭建环境"><span class="post-toc-text">搭建环境</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#官方文档"><span class="post-toc-text">官方文档</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#微信小程序IDE破解"><span class="post-toc-text">微信小程序IDE破解</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#项目简述"><span class="post-toc-text">项目简述</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#目录结构"><span class="post-toc-text">目录结构</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Demo效果图"><span class="post-toc-text">Demo效果图</span></a></li></ol>
+            </nav>
+            
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" id="post-content" itemprop="postContent">
+            <p>2016年国庆前一周，腾讯公布<strong>微信小程序</strong>开始内测。</p>
+<p>顿时IT圈子沸腾了，更有意思的是，在距离腾讯公布微信小程序开始内测的短短不到24小时的时间内，微信开发者工具被破解，没有内测资格的程序员也可以尝鲜，各个QQ群，微信群瞬间聚集了一大批程序猿热火朝天的讨论着小程序的前景，开发环境，开发过程等话题，由此可见猿猿们对此关注的程度。<br><a id="more"></a><br><img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/jianshu/wechat.jpg" alt=""></p>
+<h2 id="写在前头"><a href="#写在前头" class="headerlink" title="写在前头"></a>写在前头</h2><p>最近有段时间没有写文章了，国庆假期刚过，完善了一下假期前写的微信小程序，特地把源码分享出来，所以本文并<strong>不是 小程序开发教程</strong>，想学习如何开发微信小程序，还是去看<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/?t=1475052055756" target="_blank" rel="external">官方的文档</a>，这里只做分享和项目简介。</p>
+<h2 id="跟风作案"><a href="#跟风作案" class="headerlink" title="跟风作案"></a>跟风作案</h2><p>看着大家各个摩拳擦掌，跃跃欲试，笔者也忍不住玩弄一把，说干就干。</p>
+<p>想做一个小程序，首先得有数据，我首先想到的是三年前自己仿制的一个视频app（<a href="http://www.vmovier.com" target="_blank" rel="external">V电影</a>），没想到三年后还要用他们的接口…… </p>
+<p>首先贴一下<a href="https://github.com/yongqianvip/wechat-Vvideo" target="_blank" rel="external">源码</a></p>
+<p>由于时间仓促，功能不完善，望各位看官谅解……</p>
+<p>如果觉得还不错，还请★一下，以示鼓励😂😂😂😂</p>
+<h2 id="搭建环境"><a href="#搭建环境" class="headerlink" title="搭建环境"></a>搭建环境</h2><h3 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h3><p>想要开始开发小程序，人家<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/?t=1475052055756" target="_blank" rel="external">官方的文档</a>还是要简单的通读一遍，不然会像小白一样，问一些文档上写的明明白白的小白问题</p>
+<h3 id="微信小程序IDE破解"><a href="#微信小程序IDE破解" class="headerlink" title="微信小程序IDE破解"></a>微信小程序IDE破解</h3><p>感谢<a href="http://weibo.com/gavinkwoe?refer_flag=1001030101_&amp;is_all=1" target="_blank" rel="external">@老郭为人民服务</a>为我们提供了破解版的微信小程序IDE，参照<a href="https://github.com/gavinkwoe/weapp-ide-crack" target="_blank" rel="external">这份教程</a>，搭建完整的开发测试环境</p>
+<h2 id="项目简述"><a href="#项目简述" class="headerlink" title="项目简述"></a>项目简述</h2><h4 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h4><p><img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/wx/vvideo/folder.png" alt=""> </p>
+<p><strong>基本注意事项：</strong></p>
+<ol>
+<li>各个页面都在<code>page</code>文件夹下，如：首页<code>home</code> 频道 <code>channel</code> 系列<code>series</code> 视频播放<code>playview</code>等。 </li>
+<li>每个页面的文件夹下包含一个 <em>.js 和 </em>.wxml。</li>
+<li>util文件夹下是接口文件和工具类</li>
+<li><p>新建的页面必须在根目录下的app.json中注册，如：</p>
+<pre><code>{
+    &quot;pages&quot;: [
+        &quot;page/home/home&quot;,
+        &quot;page/test/test&quot;,
+        &quot;page/playview/playview&quot;,
+        &quot;page/channel/channel&quot;,
+        &quot;page/channelList/channelList&quot;,
+        &quot;page/series/series&quot;,
+        &quot;page/seriesDetail/seriesDetail&quot;
+    ],
+    ...
+}
+</code></pre></li>
+<li><p>app.json中可以配置tabbar，但list至少有两项，如：</p>
+<pre><code>{
+    &quot;tabBar&quot;: {
+        &quot;color&quot;: &quot;#8a8a8a&quot;,
+        &quot;selectedColor&quot;: &quot;#00bb9c&quot;,
+        &quot;borderStyle&quot;: &quot;black&quot;,
+        &quot;backgroundColor&quot;: &quot;#ffffff&quot;,
+        &quot;list&quot;: [{
+            &quot;pagePath&quot;: &quot;page/home/home&quot;,
+            &quot;iconPath&quot;: &quot;image/film64.png&quot;,
+            &quot;selectedIconPath&quot;: &quot;image/filmHL64.png&quot;,
+            &quot;text&quot;: &quot;V电影&quot;
+        },{
+            &quot;pagePath&quot;: &quot;page/channel/channel&quot;,
+            &quot;iconPath&quot;: &quot;image/channel64.png&quot;,
+            &quot;selectedIconPath&quot;: &quot;image/channelHL64.png&quot;,
+            &quot;text&quot;: &quot;频道&quot;
+        },{
+            &quot;pagePath&quot;: &quot;page/series/series&quot;,
+            &quot;iconPath&quot;: &quot;image/series64.png&quot;,
+            &quot;selectedIconPath&quot;: &quot;image/seriesHL64.png&quot;,
+            &quot;text&quot;: &quot;系列&quot;
+        },{
+            &quot;pagePath&quot;: &quot;page/test/test&quot;,
+            &quot;iconPath&quot;: &quot;image/playground64.png&quot;,
+            &quot;selectedIconPath&quot;: &quot;image/playgroundHL64.png&quot;,
+            &quot;text&quot;: &quot;playground&quot;
+        }]
+    },
+    ...
+}
+</code></pre></li>
+<li>界面布局用flex布局，对flex不熟悉的，参考<a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html?utm_source=tuicool" target="_blank" rel="external">阮一峰老师的这篇文章</a></li>
+<li><p>系统提供了获取App对象的方法</p>
+<pre><code>var APP = getApp();
+</code></pre><p>所以界面间传值使用的是app.globalData。</p>
+</li>
+</ol>
+<h2 id="Demo效果图"><a href="#Demo效果图" class="headerlink" title="Demo效果图"></a>Demo效果图</h2><p><img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/wx/vvideo/recorder6.gif" alt=""></p>
+<p><img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/wx/vvideo/vvideo_screen_6.jpg" alt=""></p>
+
+
+            
+            <div class="post-reward">
+                <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
+            </div>
+            
+            
+            <blockquote>
+                <p>
+                本文地址：
+                <a href="http://yongqianvip.github.io/2016/10/10/hugwxxcx/" target="_blank" rel="external">http://yongqianvip.github.io/2016/10/10/hugwxxcx/</a>
+                </p>
+                <footer><cite><a href="http://yongqianvip.github.io">@YongQian's Blog</a></cite></footer>
+            </blockquote>
+            </div>
+            
+<nav class="post-nav">
+  
+    <div class="waves-block waves-effect prev fl">
+      <a href="/2016/10/18/RN-Erroe-Xcode8/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">升级Xcode8后 React-Native项目遇到的错误</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next fr">
+      <a href="/2016/09/09/aws_vpn/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">没有迈不过去的坎，也没有翻不过去的墙</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="hugwxxcx" data-title="拥抱微信小程序" data-url="http://yongqianvip.github.io/2016/10/10/hugwxxcx/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"yongqian"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+        </div>
+    </div>
+</article>
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>
+var BLOG_SHARE = {
+    title: "拥抱微信小程序",
+    pic: "/img/header.jpeg",
+    summary: document.getElementsByName('summary')[0].content,
+    url: "http://yongqianvip.github.io/2016/10/10/hugwxxcx/index.html"
+};
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+
+
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        🤗🤗5毛钱也是爱🤗🤗
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</script>
+
+<script src="/js/search.js"></script>
+
+
+
+
+
+<script src="//s95.cnzz.com/z_stat.php?id=1260387689&web_id=1260387689"></script>
+
+
+
+
+
+</body>
+</html>

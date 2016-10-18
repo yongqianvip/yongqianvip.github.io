@@ -58,6 +58,97 @@
   </entry>
   
   <entry>
+    <title>拥抱微信小程序</title>
+    <link href="http://yongqianvip.github.io/2016/10/10/hugwxxcx/"/>
+    <id>http://yongqianvip.github.io/2016/10/10/hugwxxcx/</id>
+    <published>2016-10-09T16:00:00.000Z</published>
+    <updated>2016-10-18T02:39:07.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>2016年国庆前一周，腾讯公布<strong>微信小程序</strong>开始内测。</p>
+<p>顿时IT圈子沸腾了，更有意思的是，在距离腾讯公布微信小程序开始内测的短短不到24小时的时间内，微信开发者工具被破解，没有内测资格的程序员也可以尝鲜，各个QQ群，微信群瞬间聚集了一大批程序猿热火朝天的讨论着小程序的前景，开发环境，开发过程等话题，由此可见猿猿们对此关注的程度。<br><a id="more"></a><br><img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/jianshu/wechat.jpg" alt=""></p>
+<h2 id="写在前头"><a href="#写在前头" class="headerlink" title="写在前头"></a>写在前头</h2><p>最近有段时间没有写文章了，国庆假期刚过，完善了一下假期前写的微信小程序，特地把源码分享出来，所以本文并<strong>不是 小程序开发教程</strong>，想学习如何开发微信小程序，还是去看<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/?t=1475052055756" target="_blank" rel="external">官方的文档</a>，这里只做分享和项目简介。</p>
+<h2 id="跟风作案"><a href="#跟风作案" class="headerlink" title="跟风作案"></a>跟风作案</h2><p>看着大家各个摩拳擦掌，跃跃欲试，笔者也忍不住玩弄一把，说干就干。</p>
+<p>想做一个小程序，首先得有数据，我首先想到的是三年前自己仿制的一个视频app（<a href="http://www.vmovier.com" target="_blank" rel="external">V电影</a>），没想到三年后还要用他们的接口…… </p>
+<p>首先贴一下<a href="https://github.com/yongqianvip/wechat-Vvideo" target="_blank" rel="external">源码</a></p>
+<p>由于时间仓促，功能不完善，望各位看官谅解……</p>
+<p>如果觉得还不错，还请★一下，以示鼓励😂😂😂😂</p>
+<h2 id="搭建环境"><a href="#搭建环境" class="headerlink" title="搭建环境"></a>搭建环境</h2><h3 id="官方文档"><a href="#官方文档" class="headerlink" title="官方文档"></a>官方文档</h3><p>想要开始开发小程序，人家<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/?t=1475052055756" target="_blank" rel="external">官方的文档</a>还是要简单的通读一遍，不然会像小白一样，问一些文档上写的明明白白的小白问题</p>
+<h3 id="微信小程序IDE破解"><a href="#微信小程序IDE破解" class="headerlink" title="微信小程序IDE破解"></a>微信小程序IDE破解</h3><p>感谢<a href="http://weibo.com/gavinkwoe?refer_flag=1001030101_&amp;is_all=1" target="_blank" rel="external">@老郭为人民服务</a>为我们提供了破解版的微信小程序IDE，参照<a href="https://github.com/gavinkwoe/weapp-ide-crack" target="_blank" rel="external">这份教程</a>，搭建完整的开发测试环境</p>
+<h2 id="项目简述"><a href="#项目简述" class="headerlink" title="项目简述"></a>项目简述</h2><h4 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h4><p><img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/wx/vvideo/folder.png" alt=""> </p>
+<p><strong>基本注意事项：</strong></p>
+<ol>
+<li>各个页面都在<code>page</code>文件夹下，如：首页<code>home</code> 频道 <code>channel</code> 系列<code>series</code> 视频播放<code>playview</code>等。 </li>
+<li>每个页面的文件夹下包含一个 <em>.js 和 </em>.wxml。</li>
+<li>util文件夹下是接口文件和工具类</li>
+<li><p>新建的页面必须在根目录下的app.json中注册，如：</p>
+<pre><code>{
+    &quot;pages&quot;: [
+        &quot;page/home/home&quot;,
+        &quot;page/test/test&quot;,
+        &quot;page/playview/playview&quot;,
+        &quot;page/channel/channel&quot;,
+        &quot;page/channelList/channelList&quot;,
+        &quot;page/series/series&quot;,
+        &quot;page/seriesDetail/seriesDetail&quot;
+    ],
+    ...
+}
+</code></pre></li>
+<li><p>app.json中可以配置tabbar，但list至少有两项，如：</p>
+<pre><code>{
+    &quot;tabBar&quot;: {
+        &quot;color&quot;: &quot;#8a8a8a&quot;,
+        &quot;selectedColor&quot;: &quot;#00bb9c&quot;,
+        &quot;borderStyle&quot;: &quot;black&quot;,
+        &quot;backgroundColor&quot;: &quot;#ffffff&quot;,
+        &quot;list&quot;: [{
+            &quot;pagePath&quot;: &quot;page/home/home&quot;,
+            &quot;iconPath&quot;: &quot;image/film64.png&quot;,
+            &quot;selectedIconPath&quot;: &quot;image/filmHL64.png&quot;,
+            &quot;text&quot;: &quot;V电影&quot;
+        },{
+            &quot;pagePath&quot;: &quot;page/channel/channel&quot;,
+            &quot;iconPath&quot;: &quot;image/channel64.png&quot;,
+            &quot;selectedIconPath&quot;: &quot;image/channelHL64.png&quot;,
+            &quot;text&quot;: &quot;频道&quot;
+        },{
+            &quot;pagePath&quot;: &quot;page/series/series&quot;,
+            &quot;iconPath&quot;: &quot;image/series64.png&quot;,
+            &quot;selectedIconPath&quot;: &quot;image/seriesHL64.png&quot;,
+            &quot;text&quot;: &quot;系列&quot;
+        },{
+            &quot;pagePath&quot;: &quot;page/test/test&quot;,
+            &quot;iconPath&quot;: &quot;image/playground64.png&quot;,
+            &quot;selectedIconPath&quot;: &quot;image/playgroundHL64.png&quot;,
+            &quot;text&quot;: &quot;playground&quot;
+        }]
+    },
+    ...
+}
+</code></pre></li>
+<li>界面布局用flex布局，对flex不熟悉的，参考<a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html?utm_source=tuicool" target="_blank" rel="external">阮一峰老师的这篇文章</a></li>
+<li><p>系统提供了获取App对象的方法</p>
+<pre><code>var APP = getApp();
+</code></pre><p>所以界面间传值使用的是app.globalData。</p>
+</li>
+</ol>
+<h2 id="Demo效果图"><a href="#Demo效果图" class="headerlink" title="Demo效果图"></a>Demo效果图</h2><p><img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/wx/vvideo/recorder6.gif" alt=""></p>
+<p><img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/wx/vvideo/vvideo_screen_6.jpg" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;2016年国庆前一周，腾讯公布&lt;strong&gt;微信小程序&lt;/strong&gt;开始内测。&lt;/p&gt;
+&lt;p&gt;顿时IT圈子沸腾了，更有意思的是，在距离腾讯公布微信小程序开始内测的短短不到24小时的时间内，微信开发者工具被破解，没有内测资格的程序员也可以尝鲜，各个QQ群，微信群瞬间聚集了一大批程序猿热火朝天的讨论着小程序的前景，开发环境，开发过程等话题，由此可见猿猿们对此关注的程度。&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="Wechat" scheme="http://yongqianvip.github.io/tags/Wechat/"/>
+    
+  </entry>
+  
+  <entry>
     <title>没有迈不过去的坎，也没有翻不过去的墙</title>
     <link href="http://yongqianvip.github.io/2016/09/09/aws_vpn/"/>
     <id>http://yongqianvip.github.io/2016/09/09/aws_vpn/</id>
@@ -197,68 +288,6 @@ $ sudo pip install shadowsocks
     
     
       <category term="VPN" scheme="http://yongqianvip.github.io/tags/VPN/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>React-Native设置自定义字体文件</title>
-    <link href="http://yongqianvip.github.io/2016/08/26/RN_iconfont/"/>
-    <id>http://yongqianvip.github.io/2016/08/26/RN_iconfont/</id>
-    <published>2016-08-26T07:07:25.000Z</published>
-    <updated>2016-09-13T07:57:36.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>今天主要说说如何通过字体文件加载应用中的一些图标  </p>
-<p>首先推荐一个网站<a href="http://www.iconfont.cn" target="_blank" rel="external">iconfont-阿里巴巴矢量图标库</a>，这里有海量的图标，可以下载你想要的各种矢量图标，你也可以在注册并登陆账号后，把自己想要的图标打包、下载为文件<br><a id="more"></a></p>
-<ul>
-<li>关于<a href="https://facebook.github.io/react-native/docs/text.html" target="_blank" rel="external"><code>&lt;Text&gt;</code></a>组件<br>  通过<code>fontFamily</code>可以指定<code>&lt;Text&gt;</code>显示的字体文件，下文将详细说明</li>
-<li>代码</li>
-</ul>
-<pre><code>&lt;View style={{backgroundColor:'white',width:width-44,height: 36,marginTop: 2,flexDirection:'row',alignItems: 'center',justifyContent: 'space-around',}} &gt;
-    &lt;Text style={{ color: 'red', fontFamily:'iconfont',fontSize: 30 }}&gt;&amp;#xe603;&lt;/Text&gt;
-    &lt;Text style={{ color: 'red', fontFamily:'iconfont',fontSize: 30 }}&gt;&amp;#xe602;&lt;/Text&gt;
-    &lt;Text style={{ color: 'red', fontFamily:'iconfont',fontSize: 30 }}&gt;&amp;#xe604;&lt;/Text&gt;
-    &lt;Text style={{ color: 'red', fontFamily:'iconfont',fontSize: 30 }}&gt;&amp;#xe605;&lt;/Text&gt;
-    &lt;Text style={{ color: 'red', fontFamily:'iconfont',fontSize: 30 }}&gt;&amp;#xe600;&lt;/Text&gt;
-&lt;/View&gt;
-</code></pre><ul>
-<li><p>效果图：</p>
-<p>  <img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/RN/iconfont_top.png" alt="用字体文件加载图标"></p>
-</li>
-</ul>
-<h3 id="下面说重点"><a href="#下面说重点" class="headerlink" title="下面说重点"></a>下面说重点</h3><ul>
-<li><p>从<a href="http://www.iconfont.cn" target="_blank" rel="external">阿里巴巴矢量图标库</a>中选择适合的图标，并打包下载</p>
-<p>  <img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/RN/downloadicon.png" alt=""></p>
-</li>
-<li><p>下载后得到如下文件，<code>iconfont.tff</code>即为所需文件<br>  <img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/RN/iconfontfiles.png" alt="">  </p>
-</li>
-<li><p>在根工程目录下创建<code>assets/fonts/</code>文件夹，导入<code>iconfont.ttf</code>文件<br>  <img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/RN/filetree.png" alt=""></p>
-</li>
-</ul>
-<h5 id="1-iOS"><a href="#1-iOS" class="headerlink" title="1. iOS"></a>1. iOS</h5><p>把<code>fonts</code>文件夹拖到iOS工程目录下</p>
-<p>   <img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/RN/iconfontaddfile.png" alt="">  </p>
-<p>   <img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/RN/iconfontfiletree.png" alt="">  </p>
-<p>另外还需要在info.plist文件key为 <code>Fonts provided by application</code>的Array中添加item <code>fonts/iconfont.ttf</code>，到此为止，已经可以在RN项目中使用对应<code>fontFamily</code>:<code>iconfont</code>中的字体图标了</p>
-<h4 id="2-Android"><a href="#2-Android" class="headerlink" title="2. Android"></a>2. Android</h4><p>之所以在工程目录下创建<code>assets/fonts</code>这样的路径，就是为了iOS和Android统一，因为Android必须要把字体文件放在<code>[project root]/android/app/src/main/assets/fonts/</code>文件夹下才能生效，好吧，我们把工程目录下的<code>assets</code>拷贝一份到<code>Android/app/src/main</code>目录下<br>    <img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/RN/iconfontandroidfile.png" alt=""></p>
-<h4 id="3-使用"><a href="#3-使用" class="headerlink" title="3. 使用"></a>3. 使用</h4><pre><code>&lt;View style={{backgroundColor:'white',width:width-44,height: 36,marginTop: 2,flexDirection:'row',alignItems: 'center',justifyContent: 'space-around',}} &gt;
-    &lt;Text style={{ color: 'red', fontFamily:'iconfont',fontSize: 30 }}&gt;&amp;#xe603;&lt;/Text&gt;
-    &lt;Text style={{ color: 'red', fontFamily:'iconfont',fontSize: 30 }}&gt;&amp;#xe602;&lt;/Text&gt;
-    &lt;Text style={{ color: 'red', fontFamily:'iconfont',fontSize: 30 }}&gt;&amp;#xe604;&lt;/Text&gt;
-    &lt;Text style={{ color: 'red', fontFamily:'iconfont',fontSize: 30 }}&gt;&amp;#xe605;&lt;/Text&gt;
-    &lt;Text style={{ color: 'red', fontFamily:'iconfont',fontSize: 30 }}&gt;&amp;#xe600;&lt;/Text&gt;
-&lt;/View&gt;
-</code></pre><p>效果就是文章开篇的效果图了</p>
-<h4 id="4-弊端"><a href="#4-弊端" class="headerlink" title="4. 弊端"></a>4. 弊端</h4><p>图标对应的unicode码(如：<code>&amp;#xe602;``&amp;#xe603;``&amp;#xe604;``&amp;#xe605;</code>)跟显示的图标没有直接的对应关系</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;今天主要说说如何通过字体文件加载应用中的一些图标  &lt;/p&gt;
-&lt;p&gt;首先推荐一个网站&lt;a href=&quot;http://www.iconfont.cn&quot;&gt;iconfont-阿里巴巴矢量图标库&lt;/a&gt;，这里有海量的图标，可以下载你想要的各种矢量图标，你也可以在注册并登陆账号后，把自己想要的图标打包、下载为文件&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="React-Native" scheme="http://yongqianvip.github.io/tags/React-Native/"/>
     
   </entry>
   
@@ -1052,6 +1081,68 @@ self.navigationItem.rightBarButtonItems = @[rightNegativeSpacer,rightBtnItem1,ri
     
     
       <category term="iOS" scheme="http://yongqianvip.github.io/tags/iOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>React-Native设置自定义字体文件</title>
+    <link href="http://yongqianvip.github.io/2016/08/26/RN_iconfont/"/>
+    <id>http://yongqianvip.github.io/2016/08/26/RN_iconfont/</id>
+    <published>2016-08-26T07:07:25.000Z</published>
+    <updated>2016-09-13T07:57:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天主要说说如何通过字体文件加载应用中的一些图标  </p>
+<p>首先推荐一个网站<a href="http://www.iconfont.cn" target="_blank" rel="external">iconfont-阿里巴巴矢量图标库</a>，这里有海量的图标，可以下载你想要的各种矢量图标，你也可以在注册并登陆账号后，把自己想要的图标打包、下载为文件<br><a id="more"></a></p>
+<ul>
+<li>关于<a href="https://facebook.github.io/react-native/docs/text.html" target="_blank" rel="external"><code>&lt;Text&gt;</code></a>组件<br>  通过<code>fontFamily</code>可以指定<code>&lt;Text&gt;</code>显示的字体文件，下文将详细说明</li>
+<li>代码</li>
+</ul>
+<pre><code>&lt;View style={{backgroundColor:'white',width:width-44,height: 36,marginTop: 2,flexDirection:'row',alignItems: 'center',justifyContent: 'space-around',}} &gt;
+    &lt;Text style={{ color: 'red', fontFamily:'iconfont',fontSize: 30 }}&gt;&amp;#xe603;&lt;/Text&gt;
+    &lt;Text style={{ color: 'red', fontFamily:'iconfont',fontSize: 30 }}&gt;&amp;#xe602;&lt;/Text&gt;
+    &lt;Text style={{ color: 'red', fontFamily:'iconfont',fontSize: 30 }}&gt;&amp;#xe604;&lt;/Text&gt;
+    &lt;Text style={{ color: 'red', fontFamily:'iconfont',fontSize: 30 }}&gt;&amp;#xe605;&lt;/Text&gt;
+    &lt;Text style={{ color: 'red', fontFamily:'iconfont',fontSize: 30 }}&gt;&amp;#xe600;&lt;/Text&gt;
+&lt;/View&gt;
+</code></pre><ul>
+<li><p>效果图：</p>
+<p>  <img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/RN/iconfont_top.png" alt="用字体文件加载图标"></p>
+</li>
+</ul>
+<h3 id="下面说重点"><a href="#下面说重点" class="headerlink" title="下面说重点"></a>下面说重点</h3><ul>
+<li><p>从<a href="http://www.iconfont.cn" target="_blank" rel="external">阿里巴巴矢量图标库</a>中选择适合的图标，并打包下载</p>
+<p>  <img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/RN/downloadicon.png" alt=""></p>
+</li>
+<li><p>下载后得到如下文件，<code>iconfont.tff</code>即为所需文件<br>  <img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/RN/iconfontfiles.png" alt="">  </p>
+</li>
+<li><p>在根工程目录下创建<code>assets/fonts/</code>文件夹，导入<code>iconfont.ttf</code>文件<br>  <img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/RN/filetree.png" alt=""></p>
+</li>
+</ul>
+<h5 id="1-iOS"><a href="#1-iOS" class="headerlink" title="1. iOS"></a>1. iOS</h5><p>把<code>fonts</code>文件夹拖到iOS工程目录下</p>
+<p>   <img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/RN/iconfontaddfile.png" alt="">  </p>
+<p>   <img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/RN/iconfontfiletree.png" alt="">  </p>
+<p>另外还需要在info.plist文件key为 <code>Fonts provided by application</code>的Array中添加item <code>fonts/iconfont.ttf</code>，到此为止，已经可以在RN项目中使用对应<code>fontFamily</code>:<code>iconfont</code>中的字体图标了</p>
+<h4 id="2-Android"><a href="#2-Android" class="headerlink" title="2. Android"></a>2. Android</h4><p>之所以在工程目录下创建<code>assets/fonts</code>这样的路径，就是为了iOS和Android统一，因为Android必须要把字体文件放在<code>[project root]/android/app/src/main/assets/fonts/</code>文件夹下才能生效，好吧，我们把工程目录下的<code>assets</code>拷贝一份到<code>Android/app/src/main</code>目录下<br>    <img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/RN/iconfontandroidfile.png" alt=""></p>
+<h4 id="3-使用"><a href="#3-使用" class="headerlink" title="3. 使用"></a>3. 使用</h4><pre><code>&lt;View style={{backgroundColor:'white',width:width-44,height: 36,marginTop: 2,flexDirection:'row',alignItems: 'center',justifyContent: 'space-around',}} &gt;
+    &lt;Text style={{ color: 'red', fontFamily:'iconfont',fontSize: 30 }}&gt;&amp;#xe603;&lt;/Text&gt;
+    &lt;Text style={{ color: 'red', fontFamily:'iconfont',fontSize: 30 }}&gt;&amp;#xe602;&lt;/Text&gt;
+    &lt;Text style={{ color: 'red', fontFamily:'iconfont',fontSize: 30 }}&gt;&amp;#xe604;&lt;/Text&gt;
+    &lt;Text style={{ color: 'red', fontFamily:'iconfont',fontSize: 30 }}&gt;&amp;#xe605;&lt;/Text&gt;
+    &lt;Text style={{ color: 'red', fontFamily:'iconfont',fontSize: 30 }}&gt;&amp;#xe600;&lt;/Text&gt;
+&lt;/View&gt;
+</code></pre><p>效果就是文章开篇的效果图了</p>
+<h4 id="4-弊端"><a href="#4-弊端" class="headerlink" title="4. 弊端"></a>4. 弊端</h4><p>图标对应的unicode码(如：<code>&amp;#xe602;``&amp;#xe603;``&amp;#xe604;``&amp;#xe605;</code>)跟显示的图标没有直接的对应关系</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天主要说说如何通过字体文件加载应用中的一些图标  &lt;/p&gt;
+&lt;p&gt;首先推荐一个网站&lt;a href=&quot;http://www.iconfont.cn&quot;&gt;iconfont-阿里巴巴矢量图标库&lt;/a&gt;，这里有海量的图标，可以下载你想要的各种矢量图标，你也可以在注册并登陆账号后，把自己想要的图标打包、下载为文件&lt;br&gt;
+    
+    </summary>
+    
+    
+      <category term="React-Native" scheme="http://yongqianvip.github.io/tags/React-Native/"/>
     
   </entry>
   
@@ -2309,36 +2400,6 @@ NSLog(@&quot;udid from keyChain %@&quot;, udid);
     
     
       <category term="iOS" scheme="http://yongqianvip.github.io/tags/iOS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>为Xcode添加Empty Application、category、protocol等模板</title>
-    <link href="http://yongqianvip.github.io/2014/10/11/XcodeExtension/"/>
-    <id>http://yongqianvip.github.io/2014/10/11/XcodeExtension/</id>
-    <published>2014-10-11T07:07:25.000Z</published>
-    <updated>2016-09-13T08:40:33.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近项目中需要新建一个工具类（category）又想起Xcode自从6.0开始就移除了Empty Application、category、protocol等模板，想要新建这些类型的文件或者工程需要费点儿劲，闲来再写一下，总有人需要。。。。。。<br><a id="more"></a></p>
-<h4 id="1、下载需要的材料-（下载）"><a href="#1、下载需要的材料-（下载）" class="headerlink" title="1、下载需要的材料 （下载）"></a>1、下载需要的材料 （<a href="https://github.com/NSFish/AddMissingTemplates" target="_blank" rel="external">下载</a>）</h4><p><img src="http://yongqian.sinaapp.com/blog/img/2015/templateFile.png" alt="templateFile"></p>
-<p>这里分别是新建Xcode空工程，类目，延展和协议文件的模板</p>
-<h4 id="2、在Finder中打开应用程序列表，选中Xcode"><a href="#2、在Finder中打开应用程序列表，选中Xcode" class="headerlink" title="2、在Finder中打开应用程序列表，选中Xcode"></a>2、在Finder中打开应用程序列表，选中Xcode</h4><p>如下图，显示包内容后，command + shift + G，在弹出的路径输入框中贴入下边的路径</p>
-<pre><code>Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Templates/Project Templates/iOS/Application
-</code></pre><p><img src="http://yongqian.sinaapp.com/blog/img/2015/showcontent.png" alt="showcontent"></p>
-<p><img src="http://yongqian.sinaapp.com/blog/img/2015/go.png" alt="go"></p>
-<h4 id="3、把之前下载的材料，结合自己需求添加到Application文件夹中"><a href="#3、把之前下载的材料，结合自己需求添加到Application文件夹中" class="headerlink" title="3、把之前下载的材料，结合自己需求添加到Application文件夹中"></a>3、把之前下载的材料，结合自己需求添加到<code>Application</code>文件夹中</h4><p>更改这个文件的时候需要权限，输一下密码就行了<br>如下图<br><img src="http://yongqian.sinaapp.com/blog/img/2015/template.png" alt="template"></p>
-<h4 id="4、重启Xcode"><a href="#4、重启Xcode" class="headerlink" title="4、重启Xcode"></a>4、重启Xcode</h4><p><img src="http://yongqian.sinaapp.com/blog/img/2015/hasemptyapplication.png" alt="template"><br><img src="http://yongqian.sinaapp.com/blog/img/2015/hascategory.png" alt="template"></p>
-<p>———— 完 ————</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最近项目中需要新建一个工具类（category）又想起Xcode自从6.0开始就移除了Empty Application、category、protocol等模板，想要新建这些类型的文件或者工程需要费点儿劲，闲来再写一下，总有人需要。。。。。。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="Xcode" scheme="http://yongqianvip.github.io/tags/Xcode/"/>
     
   </entry>
   
