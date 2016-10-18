@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yongqianvip.github.io/"/>
-  <updated>2016-09-14T13:12:57.000Z</updated>
+  <updated>2016-10-18T02:19:49.000Z</updated>
   <id>http://yongqianvip.github.io/</id>
   
   <author>
@@ -14,6 +14,48 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RN_Erroe_Xcode8</title>
+    <link href="http://yongqianvip.github.io/2016/10/18/RN-Erroe-Xcode8/"/>
+    <id>http://yongqianvip.github.io/2016/10/18/RN-Erroe-Xcode8/</id>
+    <published>2016-10-18T02:18:57.000Z</published>
+    <updated>2016-10-18T02:19:49.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-RCTWebSocket-Semantic-issue"><a href="#1-RCTWebSocket-Semantic-issue" class="headerlink" title="1  RCTWebSocket Semantic issue"></a>1  RCTWebSocket Semantic issue</h2><ul>
+<li><p>1.</p>
+<p>  <img src="http://upload-images.jianshu.io/upload_images/1512008-675afddffc3fd6c2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>  打开RCTSCrollView.m Command+F 搜索@implementation RCTCustomScrollView<br>  只会搜索到一个结果，然后修改：</p>
+<pre><code>@implementation RCTCustomScrollView
+{
+      RCTRefreshControl *_refreshControl;//不管原来有什么，在原来的基础上加上这句
+}
+</code></pre></li>
+<li><p>2.</p>
+<p>  <img src="http://upload-images.jianshu.io/upload_images/1512008-9a9c4b0bed6b406f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<pre><code>//  SecRandomCopyBytes(kSecRandomDefault, keyBytes.length, keyBytes.mutableBytes);
+  (void)SecRandomCopyBytes(kSecRandomDefault, keyBytes.length, keyBytes.mutableBytes);
+</code></pre></li>
+</ul>
+<h2 id="2-nw-connection-get-connected-socket-block-invoke"><a href="#2-nw-connection-get-connected-socket-block-invoke" class="headerlink" title="2 __nw_connection_get_connected_socket_block_invoke"></a>2 __nw_connection_get_connected_socket_block_invoke</h2><p>Xocde控制台不断输出 如下log</p>
+<p>[] __nw_connection_get_connected_socket_block_invoke * Connection has no connected handler</p>
+<ol>
+<li>Xcode menu -&gt; Product -&gt; Edit Scheme…</li>
+<li>Environment Variables -&gt; Add -&gt; Name: “OS_ACTIVITY_MODE”, Value:”disable”</li>
+<li>Run again</li>
+</ol>
+<p><img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/rn/error/rnwebsocket.png" alt=""></p>
+<h2 id="3-Apple-Mach-O-Linker-Id-Error"><a href="#3-Apple-Mach-O-Linker-Id-Error" class="headerlink" title="3 Apple Mach-O Linker(Id) Error"></a>3 Apple Mach-O Linker(Id) Error</h2><p><img src="http://7xp7q7.com1.z0.glb.clouddn.com/image/rn/error/rn_err_apple_mach.png" alt=""><br>在<code>TARGETS</code>下 <code>Build setting</code> -&gt; <code>Other Linker Flags</code> -&gt;<br>添加 <code>-lc++</code></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;1-RCTWebSocket-Semantic-issue&quot;&gt;&lt;a href=&quot;#1-RCTWebSocket-Semantic-issue&quot; class=&quot;headerlink&quot; title=&quot;1  RCTWebSocket Semantic issue&quot;&gt;&lt;/
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>没有迈不过去的坎，也没有翻不过去的墙</title>
@@ -2297,95 +2339,6 @@ NSLog(@&quot;udid from keyChain %@&quot;, udid);
     
     
       <category term="Xcode" scheme="http://yongqianvip.github.io/tags/Xcode/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>UIWebView背景颜色的设置 webview加载html文本 禁用webview长按</title>
-    <link href="http://yongqianvip.github.io/2014/04/03/uiwebview/"/>
-    <id>http://yongqianvip.github.io/2014/04/03/uiwebview/</id>
-    <published>2014-04-03T07:07:25.000Z</published>
-    <updated>2016-09-18T02:46:38.000Z</updated>
-    
-    <content type="html"><![CDATA[<ul>
-<li><h3 id="UIWebView-添加透明效果"><a href="#UIWebView-添加透明效果" class="headerlink" title="UIWebView 添加透明效果"></a>UIWebView 添加透明效果</h3></li>
-</ul>
-<p>最近使用了UIWebView，发现当如下设置时</p>
-<pre><code>myWebView.backgroundColor = [UIColor clearColor];  
-</code></pre><p>没有实现预期的透明效果<br>后来加上</p>
-<pre><code>myWebView.opaque = NO;  
-myWebView.backgroundColor = [UIColor clearColor]; 
-</code></pre><p>OK! 透明效果有了<br><a id="more"></a></p>
-<ul>
-<li><h3 id="webview-加载html文本"><a href="#webview-加载html文本" class="headerlink" title="webview 加载html文本"></a>webview 加载html文本</h3></li>
-</ul>
-<pre><code>-(void)addWebView  
-{  
-    UIWebView *webView = [[UIWebView alloc]initWithFrame:CGRectMake(10, 10, 300, 200)];  
-    webView.opaque = NO;  
-    [self.view addSubview:webView];  
-    webView.backgroundColor = [UIColor cleanColor];  
-    NSString *ring = @&quot;&lt;h3&gt;请客劵是什么？&lt;/h3&gt;&lt;p&gt;&lt;span style=\&quot;font-size: 14px; background-color: rgb(0, 176, 240);\&quot;&gt;请客劵是网站推送的拉动用户注册的一种优惠措施！&lt;/span&gt;&lt;br/&gt;&lt;/p&gt;&lt;h3&gt;&lt;span style=\&quot;font-size: 14px; background-color: rgb(0, 176, 240);\&quot;&gt;&lt;span style=\&quot;font-size: 14px; background-color: rgb(255, 255, 255);\&quot;&gt;请客劵有什么类型？&lt;/span&gt;&lt;br/&gt;&lt;/span&gt;&lt;/h3&gt;&lt;p&gt;&lt;span style=\&quot;font-size: 14px; background-color: rgb(0, 176, 240);\&quot;&gt;&lt;span style=\&quot;font-size: 14px; background-color: rgb(255, 255, 255);\&quot;&gt;&lt;em&gt;请客劵分为www.ifood517.com&lt;span style=\&quot;font-size: 14px; background-color: rgb(255, 255, 255); color: rgb(0, 112, 192);\&quot;&gt;限非会员&lt;span style=\&quot;font-size: 14px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\&quot;&gt;和&lt;span style=\&quot;font-size: 14px; background-color: rgb(255, 255, 255); color: rgb(0, 112, 192);\&quot;&gt;会员之分&lt;span style=\&quot;font-size: 14px; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0);\&quot;&gt;！&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/em&gt;&lt;br/&gt;&lt;/span&gt;&lt;/span&gt;&lt;/p&gt;&quot;;  
-    [webView loadHTMLString:ring baseURL:[NSURL fileURLWithPath: [[NSBundle mainBundle] bundlePath]]];  
-    webView.delegate = self;  
-}  
-</code></pre><ul>
-<li><h3 id="webview-长按-会出现一些选择项-如何禁用长按"><a href="#webview-长按-会出现一些选择项-如何禁用长按" class="headerlink" title="webview 长按 会出现一些选择项 如何禁用长按"></a>webview 长按 会出现一些选择项 如何禁用长按</h3></li>
-</ul>
-<pre><code>- (void)webViewDidFinishLoad:(UIWebView *)webView {  
-   // 禁用用户选择  
-   [webView stringByEvaluatingJavaScriptFromString:@&quot;document.documentElement.style.webkitUserSelect=&apos;none&apos;;&quot;];  
-
-   // 禁用长按弹出框  
-   [webView stringByEvaluatingJavaScriptFromString:@&quot;document.documentElement.style.webkitTouchCallout=&apos;none&apos;;&quot;];  
-}  
-</code></pre><p>关于禁用长按webview后出现的功能项 最近get了一个新的方法, 用手势替换  感觉也是不错的</p>
-<pre><code>//添加手势 替换掉webView长按出现的功能选项  
-UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:nil];  
-longPress.delegate = self;  
-longPress.minimumPressDuration = 0.4; //个人测试感觉0.4秒是最合适的时间  
-[webView addGestureRecognizer:longPress];  
-</code></pre><ul>
-<li><h3 id="webView下拉会出现阴影（iOS7-0以下系统）-怎么办呢？"><a href="#webView下拉会出现阴影（iOS7-0以下系统）-怎么办呢？" class="headerlink" title="webView下拉会出现阴影（iOS7.0以下系统）  怎么办呢？"></a>webView下拉会出现阴影（iOS7.0以下系统）  怎么办呢？</h3></li>
-</ul>
-<p>看看关于UIWebView的API</p>
-<pre><code>@property(nonatomic,readonly,retain) UIScrollView *scrollView NS_AVAILABLE_IOS(5_0);  
-</code></pre><p><code>webview</code>上其实是一个<code>scrollview</code></p>
-<pre><code>[webView subviews] objectAtIndex:0];  //  这样就可以找到它了   
-</code></pre><p>然后 想避免出现下拉阴影</p>
-<pre><code>- //禁掉 `scrollview`的回弹  
-
-        [(UIScrollView *)[[webView_ subviews] objectAtIndex:0] setBounces:NO];
-
--  //隐藏
-
-        for (UIView *subView in [webView_ subviews]) {  
-               if ([subView isKindOfClass:[UIScrollView class]]) {  
-                   for (UIView *shadowView in [subView subviews]) {  
-                       if ([shadowView isKindOfClass:[UIImageView class]]) {  
-                           shadowView.hidden = YES;  
-                       }  
-                   }  
-               }  
-           }  
-</code></pre><h3 id="ok-下班！闪人……"><a href="#ok-下班！闪人……" class="headerlink" title="ok  下班！闪人……"></a>ok  下班！闪人……</h3>]]></content>
-    
-    <summary type="html">
-    
-      &lt;ul&gt;
-&lt;li&gt;&lt;h3 id=&quot;UIWebView-添加透明效果&quot;&gt;&lt;a href=&quot;#UIWebView-添加透明效果&quot; class=&quot;headerlink&quot; title=&quot;UIWebView 添加透明效果&quot;&gt;&lt;/a&gt;UIWebView 添加透明效果&lt;/h3&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;最近使用了UIWebView，发现当如下设置时&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;myWebView.backgroundColor = [UIColor clearColor];  
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;没有实现预期的透明效果&lt;br&gt;后来加上&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;myWebView.opaque = NO;  
-myWebView.backgroundColor = [UIColor clearColor]; 
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;OK! 透明效果有了&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="iOS" scheme="http://yongqianvip.github.io/tags/iOS/"/>
     
   </entry>
   
